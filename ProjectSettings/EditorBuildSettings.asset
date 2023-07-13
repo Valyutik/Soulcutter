@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
+    path: Assets/Soulcutter/Scenes/Bootstrap.unity
+    guid: 488dbfae6bd296e4dadad41a5ba41086
+  - enabled: 1
+    path: Assets/Soulcutter/Scenes/Test Level.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   m_configObjects: {}
