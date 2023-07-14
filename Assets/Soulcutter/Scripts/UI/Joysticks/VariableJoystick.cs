@@ -10,9 +10,9 @@ namespace Soulcutter.Scripts.UI.Joysticks
 
         private Vector2 _fixedPosition = Vector2.zero;
         
-        public override void Initialize()
+        public override void Initialize(Camera cam)
         {
-            base.Initialize();
+            base.Initialize(cam);
             _fixedPosition = background.anchoredPosition;
             SetMode(joystickType);
         }

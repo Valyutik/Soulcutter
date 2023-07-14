@@ -6,12 +6,13 @@ namespace Soulcutter.Scripts.UI
     public class UISystem : MonoBehaviour
     {
         [SerializeField] private Joystick joystick;
+        [SerializeField] private Camera UIcamera;
 
         public Joystick Joystick => joystick;
 
         public void Initialize()
         {
-            joystick.Initialize();
+            joystick.Initialize(UIcamera);
         }
 
         public void FixedUpdatePass()
