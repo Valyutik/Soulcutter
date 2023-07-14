@@ -9,6 +9,13 @@ namespace Soulcutter.Scripts.UI.Joysticks
         [SerializeField] private JoystickType joystickType = JoystickType.Fixed;
 
         private Vector2 _fixedPosition = Vector2.zero;
+        
+        public override void Initialize()
+        {
+            base.Initialize();
+            _fixedPosition = background.anchoredPosition;
+            SetMode(joystickType);
+        }
 
         private void SetMode(JoystickType joystick)
         {
@@ -20,13 +27,6 @@ namespace Soulcutter.Scripts.UI.Joysticks
             }
             else
                 background.gameObject.SetActive(false);
-        }
-
-        public override void Initialize()
-        {
-            base.Initialize();
-            _fixedPosition = background.anchoredPosition;
-            SetMode(joystickType);
         }
 
         public override void OnPointerDown(PointerEventData eventData)
