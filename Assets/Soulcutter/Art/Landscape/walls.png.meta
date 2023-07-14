@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 38dd2d8c6f8477b40809d35edad0d270
+guid: 13e36ba7ad30f114bb35259595e7f446
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -149,337 +149,211 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: plains_0
+      name: walls_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 48
+        y: 80
         width: 16
-        height: 16
+        height: 39
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6b3d1101617d134418c661b7c83e994c
-      internalID: 880171001
+      spriteID: c6fe60f1e3b7e2c44bbff4d1bf1e8977
+      internalID: -1802123027
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: plains_1
+      name: walls_1
       rect:
         serializedVersion: 2
-        x: 16
-        y: 48
-        width: 16
-        height: 16
+        x: 71
+        y: 96
+        width: 18
+        height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 67b152865043ac543a304547068cdbb4
-      internalID: -259709300
+      spriteID: 85633cdf37615a743836347e6f93bae3
+      internalID: -207680790
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: plains_2
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 48
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3ee6036adca121d46832fe40af2f34e0
-      internalID: 1827782414
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: plains_3
-      rect:
-        serializedVersion: 2
-        x: 48
-        y: 48
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d583a6fb4570ba44f83026ff5f51486e
-      internalID: -1860057285
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: plains_4
+      name: walls_2
       rect:
         serializedVersion: 2
         x: 0
         y: 32
         width: 16
-        height: 16
+        height: 39
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 64b74ae3ce72e5142bee2d57e85d4e6b
-      internalID: 1137311014
+      spriteID: 741ee8759abe7a644af00a0ee1bb162c
+      internalID: 525445064
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: plains_5
+      name: walls_3
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 32
+        width: 18
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8d6778a4db5ace84d97e0646fbb362bf
+      internalID: -1259382957
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: walls_4
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 80
+        width: 16
+        height: 39
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d195cb9df6d1cec4c8f7e9315963da6f
+      internalID: -1731261313
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: walls_5
       rect:
         serializedVersion: 2
         x: 16
         y: 32
         width: 16
-        height: 16
+        height: 39
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 799d1a5fd0f51394a9e235325c63aec4
-      internalID: -340176607
+      spriteID: 0ef15fbd7d9bd264493a00db4cbd6916
+      internalID: -1132449897
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: plains_6
+      name: walls_6
       rect:
         serializedVersion: 2
         x: 32
         y: 32
         width: 16
-        height: 16
+        height: 39
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 309830c113a6d8d4191c27cef2af88e7
-      internalID: 1837361004
+      spriteID: 559ba40a4ee7b2b429574ce3270a2f74
+      internalID: 2094669237
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: plains_7
+      name: walls_7
       rect:
         serializedVersion: 2
         x: 48
         y: 32
         width: 16
-        height: 16
+        height: 39
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f06da10c61674b14db346ec667d18023
-      internalID: 390062346
+      spriteID: d2105400a9485d346a754b9384d976c4
+      internalID: -1439755755
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: plains_8
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 16
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d22cb1fc485bef847a3083a4c59eeab5
-      internalID: -81430486
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: plains_9
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 16
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6c58908be7036914d94000984dd77ec3
-      internalID: 5954333
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: plains_10
+      name: walls_8
       rect:
         serializedVersion: 2
         x: 32
-        y: 16
+        y: 80
         width: 16
-        height: 16
+        height: 39
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 062c133b712268e49a94cc755e6aee61
-      internalID: 727794655
+      spriteID: bec93265070d86a4a8a42cb2052c4dd5
+      internalID: 1525142805
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: plains_11
+      name: walls_9
       rect:
         serializedVersion: 2
         x: 48
-        y: 16
+        y: 80
         width: 16
-        height: 16
+        height: 39
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 26e3943ba2bd5df4681bb64fd95e617f
-      internalID: -312898941
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: plains_12
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a6c4f10d8307e8a4c983a527d9005629
-      internalID: -13026261
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: plains_13
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 629162a07f0afc14dbfd2cebab4b0832
-      internalID: 1488100514
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: plains_14
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: dd31d31534ea876408d9ced6ad150b2f
-      internalID: 235153744
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: plains_15
-      rect:
-        serializedVersion: 2
-        x: 48
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 835b99614a4c9654490b4b4920bce7ea
-      internalID: -48254214
+      spriteID: 9e7d312f531e8e74da4777fefc59ec2c
+      internalID: 1950376358
       vertices: []
       indices: 
       edges: []
@@ -495,22 +369,16 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      plains_0: 880171001
-      plains_1: -259709300
-      plains_10: 727794655
-      plains_11: -312898941
-      plains_12: -13026261
-      plains_13: 1488100514
-      plains_14: 235153744
-      plains_15: -48254214
-      plains_2: 1827782414
-      plains_3: -1860057285
-      plains_4: 1137311014
-      plains_5: -340176607
-      plains_6: 1837361004
-      plains_7: 390062346
-      plains_8: -81430486
-      plains_9: 5954333
+      walls_0: -1802123027
+      walls_1: -207680790
+      walls_2: 525445064
+      walls_3: -1259382957
+      walls_4: -1731261313
+      walls_5: -1132449897
+      walls_6: 2094669237
+      walls_7: -1439755755
+      walls_8: 1525142805
+      walls_9: 1950376358
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

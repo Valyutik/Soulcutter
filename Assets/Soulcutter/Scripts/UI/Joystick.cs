@@ -4,9 +4,11 @@ using UnityEngine.EventSystems;
 
 namespace Soulcutter.Scripts.UI
 {
-    public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler
+    public class Joystick : MonoBehaviour, IPointerDownHandler,
+        IPointerUpHandler, IDragHandler, IBeginDragHandler, IEndDragHandler
     {
-        public event Action<float, float> OnDragEvent; 
+        public event Action<Vector2> OnDragEvent;
+        public event Action OnBeginDragEvent, OnEndDragEvent;
         
         public float Horizontal { get { return (snapX) ? SnapFloat(input.x, AxisOptions.Horizontal) : input.x; } }
         public float Vertical { get { return (snapY) ? SnapFloat(input.y, AxisOptions.Vertical) : input.y; } }
@@ -62,7 +64,7 @@ namespace Soulcutter.Scripts.UI
 
         public void FixedUpdatePass()
         {
-            OnDragEvent?.Invoke(Vertical, Horizontal);
+            OnDragEvent?.Invoke(Direction);
         }
 
         public virtual void OnPointerDown(PointerEventData eventData)
@@ -153,6 +155,9 @@ namespace Soulcutter.Scripts.UI
             }
             return Vector2.zero;
         }
+
+        public void OnBeginDrag(PointerEventData eventData) => OnBeginDragEvent?.Invoke();
+        public void OnEndDrag(PointerEventData eventData) => OnEndDragEvent?.Invoke();
     }
 
     public enum AxisOptions { Both, Horizontal, Vertical }

@@ -15,9 +15,9 @@ namespace Soulcutter.Scripts.CharacterControl
             _speed = speed;
         }
         
-        public void Move(float vertical, float horizontal)
+        public void Move(Vector2 direction)
         {
-            _rigidbody.velocity = (_transform.up * vertical +_transform.right * horizontal) * _speed;
+            _rigidbody.velocity = (_transform.up * direction.y +_transform.right * direction.x) * _speed;
         }
     }
 }
