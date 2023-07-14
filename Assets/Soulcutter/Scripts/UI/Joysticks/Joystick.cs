@@ -13,10 +13,12 @@ namespace Soulcutter.Scripts.UI.Joysticks
         private float Horizontal => (snapX) ? SnapFloat(_input.x, AxisOptions.Horizontal) : _input.x;
         private float Vertical => (snapY) ? SnapFloat(_input.y, AxisOptions.Vertical) : _input.y;
         private Vector2 Direction => new(Horizontal, Vertical);
+
         public float HandleRange
         {
             set => handleRange = Mathf.Abs(value);
         }
+
         public float DeadZone
         {
             set => deadZone = Mathf.Abs(value);
@@ -27,22 +29,22 @@ namespace Soulcutter.Scripts.UI.Joysticks
         [SerializeField] private AxisOptions axisOptions = AxisOptions.Both;
         [SerializeField] private bool snapX;
         [SerializeField] private bool snapY;
+
         [SerializeField] protected RectTransform background;
         [SerializeField] private RectTransform handle;
         private RectTransform _baseRect;
+
         private Canvas _canvas;
-        private Camera _camera;
+        private Camera _cam;
+
         private Vector2 _input = Vector2.zero;
 
-        public virtual void Initialize(Camera cam)
+        public virtual void Initialize()
         {
             HandleRange = handleRange;
             DeadZone = deadZone;
-            _camera = cam;
-            
             _baseRect = GetComponent<RectTransform>();
             _canvas = GetComponentInParent<Canvas>();
-            
             if (_canvas == null)
                 Debug.LogError("The Joystick is not placed inside a canvas");
 
@@ -66,14 +68,15 @@ namespace Soulcutter.Scripts.UI.Joysticks
 
         public void OnDrag(PointerEventData eventData)
         {
-            _camera = null;
+            _cam = null;
             if (_canvas.renderMode == RenderMode.ScreenSpaceCamera)
-                _camera = _canvas.worldCamera;
-            var position = RectTransformUtility.WorldToScreenPoint(_camera, background.position);
-            var radius = background.sizeDelta / 2;
+                _cam = _canvas.worldCamera;
+
+            Vector2 position = RectTransformUtility.WorldToScreenPoint(_cam, background.position);
+            Vector2 radius = background.sizeDelta / 2;
             _input = (eventData.position - position) / (radius * _canvas.scaleFactor);
             FormatInput();
-            HandleInput(_input.magnitude, _input.normalized, radius, _camera);
+            HandleInput(_input.magnitude, _input.normalized, radius, _cam);
             handle.anchoredPosition = _input * radius * handleRange;
         }
 
@@ -131,12 +134,11 @@ namespace Soulcutter.Scripts.UI.Joysticks
 
         protected Vector2 ScreenPointToAnchoredPosition(Vector2 screenPosition)
         {
-            if (!RectTransformUtility.ScreenPointToLocalPointInRectangle(_baseRect, screenPosition, _camera,
+            if (!RectTransformUtility.ScreenPointToLocalPointInRectangle(_baseRect, screenPosition, _cam,
                     out var localPoint)) return Vector2.zero;
             Vector2 sizeDelta;
             var pivotOffset = _baseRect.pivot * (sizeDelta = _baseRect.sizeDelta);
             return localPoint - (background.anchorMax * sizeDelta) + pivotOffset;
-
         }
 
         public void OnBeginDrag(PointerEventData eventData) => OnBeginDragEvent?.Invoke();

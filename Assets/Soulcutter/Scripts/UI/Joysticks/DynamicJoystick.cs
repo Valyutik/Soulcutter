@@ -11,10 +11,10 @@ namespace Soulcutter.Scripts.UI.Joysticks
 
         [SerializeField] private float moveThreshold = 1;
     
-        public override void Initialize(Camera cam)
+        public override void Initialize()
         {
             MoveThreshold = moveThreshold;
-            base.Initialize(cam);
+            base.Initialize();
             background.gameObject.SetActive(false);
         }
 
