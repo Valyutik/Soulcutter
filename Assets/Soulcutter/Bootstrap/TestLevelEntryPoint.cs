@@ -13,6 +13,8 @@ namespace Soulcutter.Bootstrap
         {
             uiSystem.Initialize();
             characterControl.Initialize(uiSystem.Joystick);
+            QualitySettings.vSyncCount = 0;
+            Application.targetFrameRate = 60;
         }
 
         private void FixedUpdate()
