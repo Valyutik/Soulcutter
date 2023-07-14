@@ -75,3 +75,5 @@ crashlytics-build.properties
 # Exceptions
 !*.dll
 !*.obj
+
+/Assets/Graphy - Ultimate Stats Monitor/Graphy_CustomizationScene.unitypackage.meta
