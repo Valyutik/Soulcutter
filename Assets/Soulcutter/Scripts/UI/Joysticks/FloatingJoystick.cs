@@ -1,12 +1,13 @@
-﻿using UnityEngine.EventSystems;
+﻿using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Soulcutter.Scripts.UI.Joysticks
 {
     public class FloatingJoystick : Joystick
     {
-        public override void Initialize()
+        public override void Initialize(Camera cam)
         {
-            base.Initialize();
+            base.Initialize(cam);
             background.gameObject.SetActive(false);
         }
 
