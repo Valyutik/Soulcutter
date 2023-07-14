@@ -480,6 +480,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   joystick: {fileID: 3881087802696651367}
+  UIcamera: {fileID: 356334788}
 --- !u!1 &356334787
 GameObject:
   m_ObjectHideFlags: 0
@@ -82026,7 +82027,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   handleRange: 1
-  deadZone: 0.15
+  deadZone: 0
   axisOptions: 0
   snapX: 0
   snapY: 0
