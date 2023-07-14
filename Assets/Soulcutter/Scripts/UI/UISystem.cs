@@ -1,4 +1,3 @@
-using System;
 using Soulcutter.Scripts.UI.Joysticks;
 using UnityEngine;
 
