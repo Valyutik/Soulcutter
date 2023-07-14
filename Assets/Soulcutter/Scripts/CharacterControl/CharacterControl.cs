@@ -1,4 +1,5 @@
 using Soulcutter.Scripts.UI;
+using Soulcutter.Scripts.UI.Joysticks;
 using UnityEngine;
 
 namespace Soulcutter.Scripts.CharacterControl
