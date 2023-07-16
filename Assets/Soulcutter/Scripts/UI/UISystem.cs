@@ -13,6 +13,8 @@ namespace Soulcutter.Scripts.UI
         private InteractionObjectDetector.InteractionObjectDetector _detector;
 
         public Joystick Joystick => joystick;
+        public ActionButton.ActionButton ActionButton => actionButton;
+        public ActionButtonChanger ActionButtonChanger => _actionButtonChanger;
 
         public void Initialize(InteractionObjectDetector.InteractionObjectDetector detector)
         {

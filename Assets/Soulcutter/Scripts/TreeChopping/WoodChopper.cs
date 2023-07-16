@@ -1,3 +1,4 @@
+using Soulcutter.Scripts.UI.ActionButton;
 using UnityEngine;
 
 namespace Soulcutter.Scripts.TreeChopping
@@ -5,14 +6,34 @@ namespace Soulcutter.Scripts.TreeChopping
     public class WoodChopper : MonoBehaviour
     {
         [SerializeField] private int impactForce;
+        private InteractionObjectDetector.InteractionObjectDetector _detector;
+        private ActionButton _actionButton;
 
-        public void Initialize()
+        public void Initialize(InteractionObjectDetector.InteractionObjectDetector detector, ActionButton actionButton)
         {
+            _detector = detector;
+            _actionButton = actionButton;
+
         }
 
-        private void ChopWood(Wood wood)
+        public void SubscribeActionButton()
         {
-            wood.TakeHit(impactForce);
+            _actionButton.OnPressEvent += ChopWood;
+        }
+
+        public void UnsubscribeActionButton()
+        {
+            _actionButton.OnPressEvent -= ChopWood;
+        }
+
+        private void OnDisable()
+        {
+            UnsubscribeActionButton();
+        }
+
+        private void ChopWood()
+        {
+            _detector.GetCurrentWood().TakeHit(impactForce);
         }
     }
 }

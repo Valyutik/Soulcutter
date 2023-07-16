@@ -4,12 +4,12 @@ namespace Soulcutter.Scripts.TreeChopping
 {
     public class Wood : MonoBehaviour
     {
-        private int _numberHits;
+        [SerializeField] private int numberHits;
 
-        public void TakeHit(int numberHits)
+        public void TakeHit(int number)
         {
-            _numberHits -= numberHits;
-            if (_numberHits <= 0)
+            numberHits -= number;
+            if (numberHits <= 0)
             {
                 ChopDown();
             }
