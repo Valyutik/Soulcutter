@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Soulcutter.Scripts.CharacterControl
+namespace Soulcutter.Scripts.Character
 {
     public class CharacterMovement
     {

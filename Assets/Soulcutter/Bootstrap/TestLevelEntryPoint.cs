@@ -1,4 +1,4 @@
-using Soulcutter.Scripts.CharacterControl;
+using Soulcutter.Scripts.Character;
 using Soulcutter.Scripts.UI;
 using UnityEngine;
 
