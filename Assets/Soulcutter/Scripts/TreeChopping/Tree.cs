@@ -1,6 +1,8 @@
+using UnityEngine;
+
 namespace Soulcutter.Scripts.TreeChopping
 {
-    public class TestClass
+    public class Tree : MonoBehaviour
     {
         
     }
