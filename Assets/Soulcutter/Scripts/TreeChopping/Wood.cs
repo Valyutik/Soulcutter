@@ -6,7 +6,7 @@ namespace Soulcutter.Scripts.TreeChopping
     {
         [SerializeField] private int numberHits;
 
-        public void TakeHit(int number)
+        public void TakeDamage(int number)
         {
             numberHits -= number;
             if (numberHits <= 0)
