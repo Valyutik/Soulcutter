@@ -1,3 +1,4 @@
+using Soulcutter.Scripts.UI.ActionButton;
 using Soulcutter.Scripts.UI.Joysticks;
 using UnityEngine;
 
@@ -11,10 +12,11 @@ namespace Soulcutter.Scripts.Character
         
         private Rigidbody2D _rigidbody2D;
         private CharacterMovement _characterMovement;
-        private Joystick _joystick;
         private CharacterAnimator _animator;
+        private Joystick _joystick;
+        private ActionButton _actionButton;
         
-        public void Initialize(Joystick joystick)
+        public void Initialize(Joystick joystick, ActionButton actionButton)
         {
             _rigidbody2D = GetComponent<Rigidbody2D>();
             _characterMovement = new CharacterMovement(_rigidbody2D, speed);
@@ -26,6 +28,10 @@ namespace Soulcutter.Scripts.Character
             _joystick.OnBeginDragEvent += _animator.SetRunAnimation;
             _joystick.OnEndDragEvent += _animator.SetIdleAnimation;
             _joystick.OnDragEvent += _animator.SetDirectionAnimation;
+
+            _actionButton = actionButton;
+            _actionButton.OnPressAttackEvent += _animator.SetAttackAnimation;
+            _actionButton.OnPressChopEvent += _animator.SetChopAnimation;
         }
 
         private void OnDisable()
@@ -35,6 +41,9 @@ namespace Soulcutter.Scripts.Character
             _joystick.OnBeginDragEvent -= _animator.SetRunAnimation;
             _joystick.OnEndDragEvent -= _animator.SetIdleAnimation;
             _joystick.OnDragEvent -= _animator.SetDirectionAnimation;
+            
+            _actionButton.OnPressAttackEvent -= _animator.SetAttackAnimation;
+            _actionButton.OnPressChopEvent -= _animator.SetChopAnimation;
         }
     }
 }

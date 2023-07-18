@@ -17,7 +17,7 @@ namespace Soulcutter.Bootstrap
         {
             detector.Initialize();
             uiSystem.Initialize(detector);
-            characterControl.Initialize(uiSystem.Joystick);
+            characterControl.Initialize(uiSystem.Joystick, uiSystem.ActionButton);
             woodChopper.Initialize(detector, uiSystem.ActionButton);
 
             QualitySettings.vSyncCount = 0;

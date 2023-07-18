@@ -9,6 +9,8 @@ namespace Soulcutter.Scripts.Character
         private static readonly int VelocityY = Animator.StringToHash("Velocity Y");
         private static readonly int OldVelocityX = Animator.StringToHash("OldVelocity X");
         private static readonly int OldVelocityY = Animator.StringToHash("OldVelocity Y");
+        private static readonly int Attack = Animator.StringToHash("Attack");
+        private static readonly int Chop = Animator.StringToHash("Chop");
         
         private readonly Animator _animator;
         private Vector2 _direction;
@@ -28,6 +30,16 @@ namespace Soulcutter.Scripts.Character
             _animator.SetBool(IsRun, false);
             _animator.SetFloat(OldVelocityX, _direction.x);
             _animator.SetFloat(OldVelocityY, _direction.y);
+        }
+
+        public void SetAttackAnimation()
+        {
+            _animator.SetTrigger(Attack);
+        }
+
+        public void SetChopAnimation()
+        {
+            _animator.SetTrigger(Chop);
         }
 
         public void SetDirectionAnimation(Vector2 direction)
