@@ -1,4 +1,5 @@
 using Soulcutter.Scripts.Character.Animators;
+using Soulcutter.Scripts.Character.Movement;
 using Soulcutter.Scripts.UI.ActionButton;
 using Soulcutter.Scripts.UI.Joysticks;
 using UnityEngine;

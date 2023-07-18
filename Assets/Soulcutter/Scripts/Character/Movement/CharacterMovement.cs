@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Soulcutter.Scripts.Character
+namespace Soulcutter.Scripts.Character.Movement
 {
     public class CharacterMovement
     {
