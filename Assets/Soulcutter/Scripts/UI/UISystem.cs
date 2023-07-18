@@ -14,7 +14,6 @@ namespace Soulcutter.Scripts.UI
 
         public Joystick Joystick => joystick;
         public ActionButton.ActionButton ActionButton => actionButton;
-        public ActionButtonChanger ActionButtonChanger => _actionButtonChanger;
 
         public void Initialize(InteractionObjectDetector.InteractionObjectDetector detector)
         {
@@ -23,14 +22,14 @@ namespace Soulcutter.Scripts.UI
             _actionButtonChanger = new ActionButtonChanger(actionButton);
             _detector = detector;
             
-            _detector.OnTriggerWithWood += _actionButtonChanger.SetChopButtonType;
-            _detector.OnTriggerExit += _actionButtonChanger.SetAttackButtonType;
+            _detector.OnTriggerWithWoodEvent += _actionButtonChanger.SetChopButtonType;
+            _detector.OnTriggerExitEvent += _actionButtonChanger.SetAttackButtonType;
         }
 
         private void OnDisable()
         {
-            _detector.OnTriggerWithWood -= _actionButtonChanger.SetChopButtonType;
-            _detector.OnTriggerExit -= _actionButtonChanger.SetAttackButtonType;
+            _detector.OnTriggerWithWoodEvent -= _actionButtonChanger.SetChopButtonType;
+            _detector.OnTriggerExitEvent -= _actionButtonChanger.SetAttackButtonType;
         }
 
         public void FixedUpdatePass()

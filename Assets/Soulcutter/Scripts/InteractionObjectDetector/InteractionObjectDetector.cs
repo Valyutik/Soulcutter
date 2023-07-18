@@ -6,8 +6,8 @@ namespace Soulcutter.Scripts.InteractionObjectDetector
 {
     public class InteractionObjectDetector : MonoBehaviour
     {
-        public event Action OnTriggerWithWood;
-        public event Action OnTriggerExit;
+        public event Action OnTriggerWithWoodEvent;
+        public event Action OnTriggerExitEvent;
         
         private Wood _currentWood;
 
@@ -24,13 +24,13 @@ namespace Soulcutter.Scripts.InteractionObjectDetector
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (!other.TryGetComponent<Wood>(out var currentWood)) return;
-            OnTriggerWithWood?.Invoke();
+            OnTriggerWithWoodEvent?.Invoke();
             _currentWood = currentWood;
         }
 
         private void OnTriggerExit2D(Collider2D other)
         {
-            OnTriggerExit?.Invoke();
+            OnTriggerExitEvent?.Invoke();
             _currentWood = null;
         }
     }
