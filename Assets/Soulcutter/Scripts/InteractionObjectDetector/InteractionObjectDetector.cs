@@ -8,30 +8,25 @@ namespace Soulcutter.Scripts.InteractionObjectDetector
     {
         public event Action OnTriggerWithWoodEvent;
         public event Action OnTriggerExitEvent;
-        
-        private Wood _currentWood;
+
+        public Wood CurrentWood { get; private set; }
 
         public void Initialize()
         {
             
-        }
-
-        public Wood GetCurrentWood()
-        {
-            return _currentWood;
         }
         
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (!other.TryGetComponent<Wood>(out var currentWood)) return;
             OnTriggerWithWoodEvent?.Invoke();
-            _currentWood = currentWood;
+            CurrentWood = currentWood;
         }
 
         private void OnTriggerExit2D(Collider2D other)
         {
             OnTriggerExitEvent?.Invoke();
-            _currentWood = null;
+            CurrentWood = null;
         }
     }
 }

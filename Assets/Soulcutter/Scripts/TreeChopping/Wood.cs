@@ -6,9 +6,9 @@ namespace Soulcutter.Scripts.TreeChopping
     {
         [SerializeField] private int health;
 
-        public void TakeDamage(int number)
+        public void TakeDamage(int damage)
         {
-            health -= number;
+            health -= damage;
             if (health <= 0)
             {
                 ChopDown();

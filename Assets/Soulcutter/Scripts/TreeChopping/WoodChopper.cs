@@ -24,7 +24,7 @@ namespace Soulcutter.Scripts.TreeChopping
 
         private void ChopWood()
         {
-            _detector.GetCurrentWood().TakeDamage(impactForce);
+            _detector.CurrentWood.TakeDamage(impactForce);
         }
     }
 }
