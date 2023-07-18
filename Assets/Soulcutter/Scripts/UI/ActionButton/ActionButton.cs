@@ -7,7 +7,8 @@ namespace Soulcutter.Scripts.UI.ActionButton
 {
     public class ActionButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     {
-        public event Action OnPressEvent, OnReleaseEvent;
+        public event Action OnPressAttackEvent, OnReleaseAttackEvent;
+        public event Action OnPressChopEvent, OnReleaseChopEvent;
 
         [SerializeField] private Sprite hitIcon;
         [SerializeField] private Sprite chopIcon;
@@ -35,12 +36,32 @@ namespace Soulcutter.Scripts.UI.ActionButton
         
         public void OnPointerDown(PointerEventData eventData)
         {
-            OnPressEvent?.Invoke();
+            switch (_actionButtonType)
+            {
+                case ActionButtonType.AttackButton:
+                    OnPressAttackEvent?.Invoke();
+                    break;
+                case ActionButtonType.ChoppingButton:
+                    OnPressChopEvent?.Invoke();
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
 
         public void OnPointerUp(PointerEventData eventData)
         {
-            OnReleaseEvent?.Invoke();
+            switch (_actionButtonType)
+            {
+                case ActionButtonType.AttackButton:
+                    OnReleaseAttackEvent?.Invoke();
+                    break;
+                case ActionButtonType.ChoppingButton:
+                    OnReleaseChopEvent?.Invoke();
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
     }
 }

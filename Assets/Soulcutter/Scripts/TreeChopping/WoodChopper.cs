@@ -14,21 +14,12 @@ namespace Soulcutter.Scripts.TreeChopping
             _detector = detector;
             _actionButton = actionButton;
 
-        }
-
-        public void SubscribeActionButton()
-        {
-            _actionButton.OnPressEvent += ChopWood;
-        }
-
-        public void UnsubscribeActionButton()
-        {
-            _actionButton.OnPressEvent -= ChopWood;
+            _actionButton.OnPressChopEvent += ChopWood;
         }
 
         private void OnDisable()
         {
-            UnsubscribeActionButton();
+            _actionButton.OnPressChopEvent -= ChopWood;
         }
 
         private void ChopWood()

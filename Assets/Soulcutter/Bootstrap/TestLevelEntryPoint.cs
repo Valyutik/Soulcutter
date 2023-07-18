@@ -20,17 +20,8 @@ namespace Soulcutter.Bootstrap
             characterControl.Initialize(uiSystem.Joystick);
             woodChopper.Initialize(detector, uiSystem.ActionButton);
 
-            uiSystem.ActionButtonChanger.OnSetChopButtonType += woodChopper.SubscribeActionButton;
-            uiSystem.ActionButtonChanger.OnSetAttackButtonType += woodChopper.UnsubscribeActionButton;
-            
             QualitySettings.vSyncCount = 0;
             Application.targetFrameRate = 60;
-        }
-
-        private void OnDisable()
-        {
-            uiSystem.ActionButtonChanger.OnSetChopButtonType -= woodChopper.SubscribeActionButton;
-            uiSystem.ActionButtonChanger.OnSetAttackButtonType -= woodChopper.UnsubscribeActionButton;
         }
 
         private void FixedUpdate()
