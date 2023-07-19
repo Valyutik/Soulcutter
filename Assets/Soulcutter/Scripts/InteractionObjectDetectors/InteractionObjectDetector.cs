@@ -2,7 +2,7 @@ using System;
 using Soulcutter.Scripts.TreeChopping;
 using UnityEngine;
 
-namespace Soulcutter.Scripts.InteractionObjectDetector
+namespace Soulcutter.Scripts.InteractionObjectDetectors
 {
     public class InteractionObjectDetector : MonoBehaviour
     {
