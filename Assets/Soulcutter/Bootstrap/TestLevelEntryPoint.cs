@@ -1,4 +1,5 @@
 using Soulcutter.Scripts.Character;
+using Soulcutter.Scripts.Combat;
 using Soulcutter.Scripts.InteractionObjectDetectors;
 using Soulcutter.Scripts.TreeChopping;
 using Soulcutter.Scripts.UI;
@@ -12,6 +13,7 @@ namespace Soulcutter.Bootstrap
         [SerializeField] private UISystem uiSystem;
         [SerializeField] private CharacterControl characterControl;
         [SerializeField] private WoodChopper woodChopper;
+        [SerializeField] private Attacker attacker;
         
         private void Awake()
         {
@@ -19,6 +21,7 @@ namespace Soulcutter.Bootstrap
             uiSystem.Initialize(detector);
             characterControl.Initialize(uiSystem.Joystick, uiSystem.ActionButton);
             woodChopper.Initialize(detector, characterControl.CharacterActionAnimator, uiSystem.ActionButton);
+            attacker.Initialize(detector, characterControl.CharacterActionAnimator, uiSystem.ActionButton);
 
             QualitySettings.vSyncCount = 0;
             Application.targetFrameRate = 60;

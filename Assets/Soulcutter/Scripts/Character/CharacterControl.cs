@@ -42,8 +42,6 @@ namespace Soulcutter.Scripts.Character
             _listenerAttackAndChopAnimationState.OnStateExitEvent += _characterMovement.EnableMovement;
 
             CharacterActionAnimator = new CharacterActionAnimator(animator);
-            _actionButton = actionButton;
-            _actionButton.OnPressAttackEvent += CharacterActionAnimator.SetAttackAnimation;
         }
 
         private void OnDisable()
@@ -56,8 +54,6 @@ namespace Soulcutter.Scripts.Character
             
             _listenerAttackAndChopAnimationState.OnStateEnterEvent += _characterMovement.DisableMovement;
             _listenerAttackAndChopAnimationState.OnStateExitEvent += _characterMovement.EnableMovement;
-            
-            _actionButton.OnPressAttackEvent -= CharacterActionAnimator.SetAttackAnimation;
         }
     }
 }

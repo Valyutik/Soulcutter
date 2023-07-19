@@ -20,8 +20,11 @@ namespace Soulcutter.Scripts.Character.Animators
             _animator = animator;
         }
 
-        public void SetAttackAnimation()
+        public void SetAttackAnimation(float time)
         {
+            var multiplier = 1 / time;
+            var speedAnimation = 1 * multiplier;
+            _animator.SetFloat(AttackSpeed, speedAnimation);
             _animator.SetTrigger(Attack);
         }
 
@@ -31,11 +34,6 @@ namespace Soulcutter.Scripts.Character.Animators
             var speedAnimation = 1 * multiplier;
             _animator.SetFloat(ChoppingSpeed, speedAnimation);
             _animator.SetTrigger(Chop);
-        }
-        
-        public void SetSpeedAttackAnimation(float speed)
-        {
-            _animator.SetFloat(AttackSpeed, speed);
         }
     }
 }
