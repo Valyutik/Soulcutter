@@ -6,9 +6,14 @@ namespace Soulcutter.Scripts.Character.Animators
     {
         private static readonly int Attack = Animator.StringToHash("Attack");
         private static readonly int Chop = Animator.StringToHash("Chop");
-        
-        private readonly Animator _animator;
+        private static readonly int ChoppingSpeed = Animator.StringToHash("ChoppingSpeed");
+        private static readonly int AttackSpeed = Animator.StringToHash("AttackSpeed");
+
         private Vector2 _direction;
+        private readonly Animator _animator;
+
+        public ListenerAttackAndChopAnimationState ListenerAttackAndChopAnimationState =>
+            _animator.GetBehaviour<ListenerAttackAndChopAnimationState>();
 
         public CharacterActionAnimator(Animator animator)
         {
@@ -20,9 +25,17 @@ namespace Soulcutter.Scripts.Character.Animators
             _animator.SetTrigger(Attack);
         }
 
-        public void SetChopAnimation()
+        public void SetChopAnimation(float time)
         {
+            var multiplier = 1 / time;
+            var speedAnimation = 1 * multiplier;
+            _animator.SetFloat(ChoppingSpeed, speedAnimation);
             _animator.SetTrigger(Chop);
+        }
+        
+        public void SetSpeedAttackAnimation(float speed)
+        {
+            _animator.SetFloat(AttackSpeed, speed);
         }
     }
 }

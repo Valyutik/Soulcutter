@@ -1,5 +1,5 @@
 using Soulcutter.Scripts.Character;
-using Soulcutter.Scripts.InteractionObjectDetector;
+using Soulcutter.Scripts.InteractionObjectDetectors;
 using Soulcutter.Scripts.TreeChopping;
 using Soulcutter.Scripts.UI;
 using UnityEngine;
@@ -18,7 +18,7 @@ namespace Soulcutter.Bootstrap
             detector.Initialize();
             uiSystem.Initialize(detector);
             characterControl.Initialize(uiSystem.Joystick, uiSystem.ActionButton);
-            woodChopper.Initialize(detector, uiSystem.ActionButton);
+            woodChopper.Initialize(detector, characterControl.CharacterActionAnimator, uiSystem.ActionButton);
 
             QualitySettings.vSyncCount = 0;
             Application.targetFrameRate = 60;
