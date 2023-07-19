@@ -1,9 +1,9 @@
 using System;
 using UnityEngine;
 
-namespace Soulcutter.Scripts.Character.Movement
+namespace Soulcutter.Scripts.Character.Animators
 {
-    public class CharacterMovementDisable : StateMachineBehaviour
+    public class ListenerAttackAndChopAnimationState : StateMachineBehaviour
     {
         public event Action OnStateEnterEvent, OnStateExitEvent;
         

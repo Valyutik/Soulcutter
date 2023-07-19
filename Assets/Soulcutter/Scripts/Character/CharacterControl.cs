@@ -15,10 +15,11 @@ namespace Soulcutter.Scripts.Character
         private Rigidbody2D _rigidbody2D;
         private CharacterMovement _characterMovement;
         private CharacterMovementAnimator _characterMovementAnimator;
-        private CharacterActionAnimator _characterActionAnimator;
-        private CharacterMovementDisable _characterMovementDisable;
+        private ListenerAttackAndChopAnimationState _listenerAttackAndChopAnimationState;
         private Joystick _joystick;
         private ActionButton _actionButton;
+
+        public CharacterActionAnimator CharacterActionAnimator { get; private set; }
 
         public void Initialize(Joystick joystick, ActionButton actionButton)
         {
@@ -31,34 +32,32 @@ namespace Soulcutter.Scripts.Character
             var animator = GetComponent<Animator>();
             
             _characterMovementAnimator = new CharacterMovementAnimator(animator);
-            _characterMovementDisable = animator.GetBehaviour<CharacterMovementDisable>();
-            
-            _characterMovementDisable.OnStateEnterEvent += _characterMovement.DisableMovement;
-            _characterMovementDisable.OnStateExitEvent += _characterMovement.EnableMovement;
 
             _characterMovement.OnPlayerMoveEvent += _characterMovementAnimator.SetDirectionAnimation;
             _joystick.OnBeginDragEvent += _characterMovementAnimator.SetRunAnimation;
             _joystick.OnEndDragEvent += _characterMovementAnimator.SetIdleAnimation;
 
-            _characterActionAnimator = new CharacterActionAnimator(animator);
+            _listenerAttackAndChopAnimationState = animator.GetBehaviour<ListenerAttackAndChopAnimationState>();
+            _listenerAttackAndChopAnimationState.OnStateEnterEvent += _characterMovement.DisableMovement;
+            _listenerAttackAndChopAnimationState.OnStateExitEvent += _characterMovement.EnableMovement;
+
+            CharacterActionAnimator = new CharacterActionAnimator(animator);
             _actionButton = actionButton;
-            _actionButton.OnPressAttackEvent += _characterActionAnimator.SetAttackAnimation;
-            _actionButton.OnPressChopEvent += _characterActionAnimator.SetChopAnimation;
+            _actionButton.OnPressAttackEvent += CharacterActionAnimator.SetAttackAnimation;
         }
 
         private void OnDisable()
         {
             _joystick.OnDragEvent -= _characterMovement.Move;
             
-            _characterMovementDisable.OnStateEnterEvent -= _characterMovement.DisableMovement;
-            _characterMovementDisable.OnStateExitEvent -= _characterMovement.EnableMovement;
-            
             _characterMovement.OnPlayerMoveEvent -= _characterMovementAnimator.SetDirectionAnimation;
             _joystick.OnBeginDragEvent -= _characterMovementAnimator.SetRunAnimation;
             _joystick.OnEndDragEvent -= _characterMovementAnimator.SetIdleAnimation;
             
-            _actionButton.OnPressAttackEvent -= _characterActionAnimator.SetAttackAnimation;
-            _actionButton.OnPressChopEvent -= _characterActionAnimator.SetChopAnimation;
+            _listenerAttackAndChopAnimationState.OnStateEnterEvent += _characterMovement.DisableMovement;
+            _listenerAttackAndChopAnimationState.OnStateExitEvent += _characterMovement.EnableMovement;
+            
+            _actionButton.OnPressAttackEvent -= CharacterActionAnimator.SetAttackAnimation;
         }
     }
 }
