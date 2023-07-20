@@ -27,6 +27,11 @@ namespace Soulcutter.Bootstrap
             Application.targetFrameRate = 60;
         }
 
+        private void Update()
+        {
+            detector.UpdatePass();
+        }
+
         private void FixedUpdate()
         {
             uiSystem.FixedUpdatePass();
