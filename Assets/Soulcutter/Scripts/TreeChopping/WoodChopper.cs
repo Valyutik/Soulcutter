@@ -1,3 +1,4 @@
+using System.Collections;
 using Soulcutter.Scripts.Character.Animators;
 using Soulcutter.Scripts.InteractionObjectDetectors;
 using Soulcutter.Scripts.UI.ActionButton;
@@ -13,6 +14,7 @@ namespace Soulcutter.Scripts.TreeChopping
         private CharacterActionAnimator _characterActionAnimator;
         private ActionButton _actionButton;
         private ListenerAttackAndChopAnimationState _listenerAttackAndChopAnimationState;
+        private WaitForSeconds _waitForSeconds;
         private bool _isChopping;
 
         public void Initialize(InteractionObjectDetector detector,
@@ -23,21 +25,28 @@ namespace Soulcutter.Scripts.TreeChopping
             _characterActionAnimator = characterActionAnimator;
             _actionButton = actionButton;
             _listenerAttackAndChopAnimationState = _characterActionAnimator.ListenerAttackAndChopAnimationState;
+            _waitForSeconds = new WaitForSeconds(choppingTime / 2.5f);
             
-            _actionButton.OnPressChopEvent += ChopWood;
+            _actionButton.OnPressChopEvent += StartCoroutineChopWood;
             _listenerAttackAndChopAnimationState.OnStateExitEvent += ActivateChopping;
         }
 
         private void OnDisable()
         {
-            _actionButton.OnPressChopEvent -= ChopWood;
+            _actionButton.OnPressChopEvent -= StartCoroutineChopWood;
             _listenerAttackAndChopAnimationState.OnStateExitEvent -= ActivateChopping;
         }
 
-        private void ChopWood()
+        private void StartCoroutineChopWood()
         {
-            if (!_isChopping) return;
+            StartCoroutine(ChopWood());
+        }
+
+        private IEnumerator ChopWood()
+        {
+            if (!_isChopping) yield break;
             _characterActionAnimator.SetChopAnimation(choppingTime);
+            yield return _waitForSeconds;
             _detector.CurrentWood.TakeDamage(impactForce);
             _isChopping = false;
         }
