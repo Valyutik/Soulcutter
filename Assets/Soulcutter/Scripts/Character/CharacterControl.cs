@@ -11,15 +11,21 @@ namespace Soulcutter.Scripts.Character
     {
         [Range(0,100)]
         [SerializeField] private float speed;
+        [Range(0,10)]
+        [SerializeField] private float timeCombatAttack;
+        [Range(0,10)]
+        [SerializeField] private float timeChop;
         
         private Rigidbody2D _rigidbody2D;
         private CharacterMovement _characterMovement;
         private CharacterMovementAnimator _characterMovementAnimator;
+        private CharacterActionAnimator _characterActionAnimator;
+        private CharacterActionActivator _characterActionActivator;
         private ListenerAttackAndChopAnimationState _listenerAttackAndChopAnimationState;
         private Joystick _joystick;
         private ActionButton _actionButton;
 
-        public CharacterActionAnimator CharacterActionAnimator { get; private set; }
+        public CharacterActionActivator CharacterActionActivator { get; private set; }
 
         public void Initialize(Joystick joystick, ActionButton actionButton)
         {
@@ -30,7 +36,6 @@ namespace Soulcutter.Scripts.Character
             joystick.OnDragEvent += _characterMovement.Move;
             
             var animator = GetComponent<Animator>();
-            
             _characterMovementAnimator = new CharacterMovementAnimator(animator);
 
             _characterMovement.OnPlayerMoveEvent += _characterMovementAnimator.SetDirectionAnimation;
@@ -41,7 +46,9 @@ namespace Soulcutter.Scripts.Character
             _listenerAttackAndChopAnimationState.OnStateEnterEvent += _characterMovement.DisableMovement;
             _listenerAttackAndChopAnimationState.OnStateExitEvent += _characterMovement.EnableMovement;
 
-            CharacterActionAnimator = new CharacterActionAnimator(animator);
+            _characterActionAnimator = new CharacterActionAnimator(animator);
+            CharacterActionActivator = new CharacterActionActivator(actionButton, _listenerAttackAndChopAnimationState,
+                _characterActionAnimator,timeChop, timeCombatAttack);
         }
 
         private void OnDisable()
@@ -54,6 +61,8 @@ namespace Soulcutter.Scripts.Character
             
             _listenerAttackAndChopAnimationState.OnStateEnterEvent += _characterMovement.DisableMovement;
             _listenerAttackAndChopAnimationState.OnStateExitEvent += _characterMovement.EnableMovement;
+            
+            CharacterActionActivator.Deconstruct();
         }
     }
 }

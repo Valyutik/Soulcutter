@@ -20,8 +20,8 @@ namespace Soulcutter.Bootstrap
             detector.Initialize();
             uiSystem.Initialize(detector);
             characterControl.Initialize(uiSystem.Joystick, uiSystem.ActionButton);
-            woodChopper.Initialize(detector, characterControl.CharacterActionAnimator, uiSystem.ActionButton);
-            attacker.Initialize(detector, characterControl.CharacterActionAnimator, uiSystem.ActionButton);
+            woodChopper.Initialize(detector, characterControl.CharacterActionActivator);
+            attacker.Initialize(detector, characterControl.CharacterActionActivator);
 
             QualitySettings.vSyncCount = 0;
             Application.targetFrameRate = 60;

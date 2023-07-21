@@ -779,7 +779,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   impactForce: 1
-  choppingTime: 1
 --- !u!1001 &407016496
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1417,7 +1416,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
-  attackTime: 1
 --- !u!1 &666281187
 GameObject:
   m_ObjectHideFlags: 0
@@ -83339,6 +83337,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  timeCombatAttack: 1
+  timeChop: 1
 --- !u!50 &1640484635
 Rigidbody2D:
   serializedVersion: 4
