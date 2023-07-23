@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Soulcutter.Bootstrap
+namespace Soulcutter.Scripts.Bootstrap
 {
     public class Bootstrap : MonoBehaviour
     {

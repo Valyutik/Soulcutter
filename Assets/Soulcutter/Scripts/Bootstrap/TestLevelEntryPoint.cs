@@ -5,7 +5,7 @@ using Soulcutter.Scripts.TreeChopping;
 using Soulcutter.Scripts.UI;
 using UnityEngine;
 
-namespace Soulcutter.Bootstrap
+namespace Soulcutter.Scripts.Bootstrap
 {
     public class TestLevelEntryPoint : MonoBehaviour
     {

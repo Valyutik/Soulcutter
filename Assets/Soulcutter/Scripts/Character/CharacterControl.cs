@@ -47,7 +47,7 @@ namespace Soulcutter.Scripts.Character
             _listenerAttackAndChopAnimationState.OnStateExitEvent += _characterMovement.EnableMovement;
 
             _characterActionAnimator = new CharacterActionAnimator(animator);
-            CharacterActionActivator = new CharacterActionActivator(actionButton, _listenerAttackAndChopAnimationState,
+            CharacterActionActivator = new CharacterActionActivator(actionButton,
                 _characterActionAnimator,timeChop, timeCombatAttack);
         }
 
