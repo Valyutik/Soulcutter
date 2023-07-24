@@ -18,20 +18,20 @@ namespace Soulcutter.Scripts.Combat
             _detector = detector;
             _waitForSeconds = new WaitForSeconds(_characterActionActivator.TimeCombatAttack / 3f);
             
-            _characterActionActivator.OnActivatedCombatAttackEvent += StartCoroutineChopWood;
+            _characterActionActivator.OnActivatedCombatAttackEvent += StartCoroutineAttack;
         }
 
         private void OnDisable()
         {
-            _characterActionActivator.OnActivatedCombatAttackEvent -= StartCoroutineChopWood;
+            _characterActionActivator.OnActivatedCombatAttackEvent -= StartCoroutineAttack;
         }
 
-        private void StartCoroutineChopWood()
+        private void StartCoroutineAttack()
         {
-            StartCoroutine(ChopWood());
+            StartCoroutine(Attack());
         }
         
-        private IEnumerator ChopWood()
+        private IEnumerator Attack()
         {
             yield return _waitForSeconds;
             if (_detector.CurrentEnemy != null) _detector.CurrentEnemy.TakeDamage(damage);
