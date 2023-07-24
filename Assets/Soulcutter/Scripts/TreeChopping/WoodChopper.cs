@@ -34,6 +34,7 @@ namespace Soulcutter.Scripts.TreeChopping
         private IEnumerator ChopWood()
         {
             yield return _waitForSeconds;
+            _detector.CurrentWood.WoodAnimator.SetHitAnimation();
             _detector.CurrentWood.TakeDamage(impactForce);
         }
     }
