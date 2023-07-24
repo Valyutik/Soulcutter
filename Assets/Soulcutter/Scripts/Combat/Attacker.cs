@@ -1,3 +1,4 @@
+using System.Collections;
 using Soulcutter.Scripts.Character;
 using Soulcutter.Scripts.InteractionObjectDetectors;
 using UnityEngine;
@@ -8,22 +9,32 @@ namespace Soulcutter.Scripts.Combat
     {
         [SerializeField] private int damage = 1;
         private CharacterActionActivator _characterActionActivator;
+        private InteractionObjectDetector _detector;
+        private WaitForSeconds _waitForSeconds;
 
         public void Initialize(InteractionObjectDetector detector, CharacterActionActivator characterActionActivator)
         {
             _characterActionActivator = characterActionActivator;
+            _detector = detector;
+            _waitForSeconds = new WaitForSeconds(_characterActionActivator.TimeCombatAttack / 3f);
             
-            _characterActionActivator.OnActivatedCombatAttackEvent += OnAttack;
+            _characterActionActivator.OnActivatedCombatAttackEvent += StartCoroutineChopWood;
         }
 
         private void OnDisable()
         {
-            _characterActionActivator.OnActivatedCombatAttackEvent -= OnAttack;
+            _characterActionActivator.OnActivatedCombatAttackEvent -= StartCoroutineChopWood;
         }
 
-        private void OnAttack()
+        private void StartCoroutineChopWood()
         {
-            
+            StartCoroutine(ChopWood());
+        }
+        
+        private IEnumerator ChopWood()
+        {
+            yield return _waitForSeconds;
+            if (_detector.CurrentEnemy != null) _detector.CurrentEnemy.TakeDamage(damage);
         }
     }
 }

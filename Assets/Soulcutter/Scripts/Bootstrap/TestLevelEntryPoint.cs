@@ -13,6 +13,7 @@ namespace Soulcutter.Scripts.Bootstrap
         [SerializeField] private UISystem uiSystem;
         [SerializeField] private CharacterControl characterControl;
         [SerializeField] private WoodChopper woodChopper;
+        [SerializeField] private EnemyController enemyController;
         [SerializeField] private Attacker attacker;
         
         private void Awake()
@@ -21,6 +22,7 @@ namespace Soulcutter.Scripts.Bootstrap
             uiSystem.Initialize(detector);
             characterControl.Initialize(uiSystem.Joystick, uiSystem.ActionButton);
             woodChopper.Initialize(detector, characterControl.CharacterActionActivator);
+            enemyController.Initialize(characterControl.transform);
             attacker.Initialize(detector, characterControl.CharacterActionActivator);
 
             QualitySettings.vSyncCount = 0;
@@ -30,6 +32,7 @@ namespace Soulcutter.Scripts.Bootstrap
         private void Update()
         {
             detector.UpdatePass();
+            enemyController.UpdatePass();
         }
 
         private void FixedUpdate()

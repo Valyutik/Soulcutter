@@ -1,4 +1,5 @@
 using System;
+using Soulcutter.Scripts.Combat;
 using Soulcutter.Scripts.TreeChopping;
 using UnityEngine;
 
@@ -11,6 +12,7 @@ namespace Soulcutter.Scripts.InteractionObjectDetectors
         public event Action OnTriggerExitEvent;
 
         public Wood CurrentWood { get; private set; }
+        public Enemy CurrentEnemy { get; private set; }
 
         private DetectorRotator _detectorRotator;
 
@@ -27,15 +29,20 @@ namespace Soulcutter.Scripts.InteractionObjectDetectors
         
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (!other.TryGetComponent<Wood>(out var currentWood)) return;
-            if (currentWood.isFallen)
+            if (other.TryGetComponent<Wood>(out var currentWood))
             {
-                OnTriggerExitEvent?.Invoke();
-                return;
+                if (currentWood.isFallen)
+                {
+                    OnTriggerExitEvent?.Invoke();
+                    return;
+                }
+                OnTriggerWithWoodEvent?.Invoke();
+                CurrentWood = currentWood;
             }
-            
-            OnTriggerWithWoodEvent?.Invoke();
-            CurrentWood = currentWood;
+            else if (other.TryGetComponent<Enemy>(out var currentEnemy))
+            {
+                CurrentEnemy = currentEnemy;
+            }
         }
 
         private void OnTriggerExit2D(Collider2D other)
