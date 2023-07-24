@@ -28,6 +28,12 @@ namespace Soulcutter.Scripts.InteractionObjectDetectors
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (!other.TryGetComponent<Wood>(out var currentWood)) return;
+            if (currentWood.isFallen)
+            {
+                OnTriggerExitEvent?.Invoke();
+                return;
+            }
+            
             OnTriggerWithWoodEvent?.Invoke();
             CurrentWood = currentWood;
         }
