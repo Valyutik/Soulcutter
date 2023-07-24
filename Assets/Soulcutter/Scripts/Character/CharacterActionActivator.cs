@@ -1,6 +1,7 @@
 using System;
 using Soulcutter.Scripts.Character.Animators;
 using Soulcutter.Scripts.UI.ActionButton;
+using UnityEngine;
 
 namespace Soulcutter.Scripts.Character
 {
@@ -8,27 +9,25 @@ namespace Soulcutter.Scripts.Character
     {
         public event Action OnActivatedChopEvent, OnActivatedCombatAttackEvent;
         
-        public float TimeChop => _timeChop;
-        public float TimeCombatAttack => _timeCombatAttack;
+        public float TimeChop { get; }
+
+        public float TimeCombatAttack { get; }
 
         private readonly ActionButton _actionButton;
         private readonly CharacterActionAnimator _characterActionAnimator;
         private readonly ListenerAttackAndChopAnimationState _listenerAttackAndChopAnimationState;
-
-        private readonly float _timeChop;
-        private readonly float _timeCombatAttack;
         private bool _isAction;
 
-        public CharacterActionActivator(ActionButton actionButton,
-            CharacterActionAnimator characterActionAnimator,
+        public CharacterActionActivator(ActionButton actionButton, Animator animator,
             float timeChop, float timeCombatAttack)
         {
             _isAction = true;
             _actionButton = actionButton;
-            _characterActionAnimator = characterActionAnimator;
-            _listenerAttackAndChopAnimationState = _characterActionAnimator.ListenerAttackAndChopAnimationState;
-            _timeChop = timeChop;
-            _timeCombatAttack = timeCombatAttack;
+            _characterActionAnimator = new CharacterActionAnimator(animator);
+            _listenerAttackAndChopAnimationState = 
+                _characterActionAnimator.ListenerAttackAndChopAnimationState;
+            TimeChop = timeChop;
+            TimeCombatAttack = timeCombatAttack;
 
             _actionButton.OnPressAttackEvent += OnActivatedCombatAttack;
             _actionButton.OnPressChopEvent += OnActivatedChop;
@@ -49,14 +48,14 @@ namespace Soulcutter.Scripts.Character
         private void OnActivatedChop()
         {
             if (!_isAction) return;
-            _characterActionAnimator.SetChopAnimation(_timeChop);
+            _characterActionAnimator.SetChopAnimation(TimeChop);
             OnActivatedChopEvent?.Invoke();
             _isAction = false;
         }
         private void OnActivatedCombatAttack()
         {
             if (!_isAction) return;
-            _characterActionAnimator.SetAttackAnimation(_timeCombatAttack);
+            _characterActionAnimator.SetAttackAnimation(TimeCombatAttack);
             OnActivatedCombatAttackEvent?.Invoke();
             _isAction = false;
         }

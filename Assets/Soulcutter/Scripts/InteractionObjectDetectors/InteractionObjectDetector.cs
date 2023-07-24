@@ -31,7 +31,7 @@ namespace Soulcutter.Scripts.InteractionObjectDetectors
         {
             if (other.TryGetComponent<Wood>(out var currentWood))
             {
-                if (currentWood.isFallen)
+                if (currentWood.IsFallen)
                 {
                     OnTriggerExitEvent?.Invoke();
                     return;

@@ -5,7 +5,7 @@ namespace Soulcutter.Scripts.TreeChopping.Animators
     public class WoodAnimator
     {
         private static readonly int Hit = Animator.StringToHash("Hit");
-        private static readonly int IsFalling = Animator.StringToHash("isFalling");
+        private static readonly int IsFalling = Animator.StringToHash("IsFalling");
         
         private readonly Animator _animator;
 

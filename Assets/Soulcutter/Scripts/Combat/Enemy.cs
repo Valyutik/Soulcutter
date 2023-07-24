@@ -15,7 +15,10 @@ namespace Soulcutter.Scripts.Combat
 
         public void UpdatePass(Vector2 point)
         {
-            _enemyMovement.SetDirection(point);
+            if (isActiveAndEnabled)
+            {
+                _enemyMovement.SetDirection(point);
+            }
         }
 
         public void TakeDamage(int damage)

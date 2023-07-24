@@ -6,32 +6,28 @@ namespace Soulcutter.Scripts.TreeChopping
     public class Wood : MonoBehaviour
     {
         [SerializeField] private int health;
-        public bool isFallen { get; private set; }
-        public WoodAnimator WoodAnimator { get; private set; }
+        public bool IsFallen { get; private set; }
+        private WoodAnimator WoodAnimator { get; set; }
 
         public void Start()
         {
-            isFallen = false;
+            IsFallen = false;
             var animator = GetComponent<Animator>();
             WoodAnimator = new WoodAnimator(animator);
         }
 
         public void TakeDamage(int damage)
         {
-            if (isFallen) return;
-            
+            if (IsFallen) return;
             health -= damage;
-                
+            WoodAnimator.SetHitAnimation();
             if (health <= 0)
-            {
                 ChopDown();
-            }
         }
 
         private void ChopDown()
         {
-            isFallen = true;
-            
+            IsFallen = true;
             WoodAnimator.SetFallingAnimation();
         }
     }

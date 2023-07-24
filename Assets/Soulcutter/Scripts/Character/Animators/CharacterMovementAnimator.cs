@@ -4,7 +4,7 @@ namespace Soulcutter.Scripts.Character.Animators
 {
     public class CharacterMovementAnimator
     {
-        private static readonly int IsRun = Animator.StringToHash("isRun");
+        private static readonly int IsRun = Animator.StringToHash("IsRun");
         private static readonly int VelocityX = Animator.StringToHash("Velocity X");
         private static readonly int VelocityY = Animator.StringToHash("Velocity Y");
         

@@ -12,7 +12,8 @@ namespace Soulcutter.Scripts.TreeChopping
         private CharacterActionActivator _characterActionActivator;
         private WaitForSeconds _waitForSeconds;
 
-        public void Initialize(InteractionObjectDetector detector, CharacterActionActivator characterActionActivator)
+        public void Initialize(InteractionObjectDetector detector,
+            CharacterActionActivator characterActionActivator)
         {
             _detector = detector;
             _characterActionActivator = characterActionActivator;
@@ -34,7 +35,6 @@ namespace Soulcutter.Scripts.TreeChopping
         private IEnumerator ChopWood()
         {
             yield return _waitForSeconds;
-            _detector.CurrentWood.WoodAnimator.SetHitAnimation();
             _detector.CurrentWood.TakeDamage(impactForce);
         }
     }

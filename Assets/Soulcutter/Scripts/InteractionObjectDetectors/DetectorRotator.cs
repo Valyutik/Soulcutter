@@ -6,8 +6,8 @@ namespace Soulcutter.Scripts.InteractionObjectDetectors
     {
         private readonly Rigidbody2D _rigidbody2D;
         private readonly BoxCollider2D _boxCollider2D;
-        private readonly Vector2 _rightPosition = new Vector2(0.72f, 0);
-        private readonly Vector2 _frontPosition = new Vector2(0, -0.55f);
+        private readonly Vector2 _rightPosition = new(0.72f, 0);
+        private readonly Vector2 _frontPosition = new(0, -0.55f);
 
         public DetectorRotator(Rigidbody2D rigidbody2D, BoxCollider2D boxCollider2D)
         {

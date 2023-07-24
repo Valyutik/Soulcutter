@@ -19,7 +19,6 @@ namespace Soulcutter.Scripts.Character
         private Rigidbody2D _rigidbody2D;
         private CharacterMovement _characterMovement;
         private CharacterMovementAnimator _characterMovementAnimator;
-        private CharacterActionAnimator _characterActionAnimator;
         private CharacterActionActivator _characterActionActivator;
         private ListenerAttackAndChopAnimationState _listenerAttackAndChopAnimationState;
         private Joystick _joystick;
@@ -30,12 +29,12 @@ namespace Soulcutter.Scripts.Character
         public void Initialize(Joystick joystick, ActionButton actionButton)
         {
             _rigidbody2D = GetComponent<Rigidbody2D>();
-            _characterMovement = new CharacterMovement(_rigidbody2D, speed);
+            var animator = GetComponent<Animator>();
             
+            _characterMovement = new CharacterMovement(_rigidbody2D, speed);
             _joystick = joystick;
             joystick.OnDragEvent += _characterMovement.Move;
             
-            var animator = GetComponent<Animator>();
             _characterMovementAnimator = new CharacterMovementAnimator(animator);
 
             _characterMovement.OnPlayerMoveEvent += _characterMovementAnimator.SetDirectionAnimation;
@@ -46,9 +45,8 @@ namespace Soulcutter.Scripts.Character
             _listenerAttackAndChopAnimationState.OnStateEnterEvent += _characterMovement.DisableMovement;
             _listenerAttackAndChopAnimationState.OnStateExitEvent += _characterMovement.EnableMovement;
 
-            _characterActionAnimator = new CharacterActionAnimator(animator);
             CharacterActionActivator = new CharacterActionActivator(actionButton,
-                _characterActionAnimator,timeChop, timeCombatAttack);
+                animator,timeChop, timeCombatAttack);
         }
 
         private void OnDisable()
