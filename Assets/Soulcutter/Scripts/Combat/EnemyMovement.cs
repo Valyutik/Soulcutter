@@ -6,8 +6,8 @@ namespace Soulcutter.Scripts.Combat
     public class EnemyMovement
     {
         private readonly AgentOverride2d _navMeshAgent;
-        private Vector2 _point;
-
+        public Vector2 Velocity => _navMeshAgent.Agent.velocity;
+        
         public EnemyMovement(AgentOverride2d navMeshAgent)
         {
             _navMeshAgent = navMeshAgent;
