@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace Soulcutter.Scripts.TreeChopping
 {
+    [RequireComponent(typeof(Animator))]
     public class Wood : MonoBehaviour
     {
         [SerializeField] private int health;
