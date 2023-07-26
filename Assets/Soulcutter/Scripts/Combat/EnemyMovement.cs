@@ -1,4 +1,4 @@
-using NavMeshPlus.Extensions;
+using NavMeshPlus.NavMeshComponents.Scripts;
 using UnityEngine;
 
 namespace Soulcutter.Scripts.Combat

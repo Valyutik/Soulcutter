@@ -1,6 +1,6 @@
 using System.Collections;
 using Soulcutter.Scripts.Character;
-using Soulcutter.Scripts.InteractionObjectDetectors;
+using Soulcutter.Scripts.Detectors;
 using UnityEngine;
 
 namespace Soulcutter.Scripts.Combat
@@ -9,10 +9,10 @@ namespace Soulcutter.Scripts.Combat
     {
         [SerializeField] private int damage = 1;
         private CharacterActionActivator _characterActionActivator;
-        private InteractionObjectDetector _detector;
+        private EnemyDetector _detector;
         private WaitForSeconds _waitForSeconds;
 
-        public void Initialize(InteractionObjectDetector detector, CharacterActionActivator characterActionActivator)
+        public void Initialize(EnemyDetector detector, CharacterActionActivator characterActionActivator)
         {
             _characterActionActivator = characterActionActivator;
             _detector = detector;

@@ -6,6 +6,7 @@ namespace Soulcutter.Scripts.TreeChopping
     [RequireComponent(typeof(Animator))]
     public class Wood : MonoBehaviour
     {
+        [Range(0,100)]
         [SerializeField] private int health;
         public bool IsFallen { get; private set; }
         private WoodAnimator WoodAnimator { get; set; }

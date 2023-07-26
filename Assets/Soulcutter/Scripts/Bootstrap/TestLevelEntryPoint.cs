@@ -1,6 +1,5 @@
-using Soulcutter.Scripts.Character;
 using Soulcutter.Scripts.Combat;
-using Soulcutter.Scripts.InteractionObjectDetectors;
+using Soulcutter.Scripts.Detectors;
 using Soulcutter.Scripts.TreeChopping;
 using Soulcutter.Scripts.UI;
 using UnityEngine;
@@ -9,21 +8,23 @@ namespace Soulcutter.Scripts.Bootstrap
 {
     public class TestLevelEntryPoint : MonoBehaviour
     {
-        [SerializeField] private InteractionObjectDetector detector;
+        [SerializeField] private WoodDetector woodDetector;
+        [SerializeField] private EnemyDetector enemyDetector;
         [SerializeField] private UISystem uiSystem;
-        [SerializeField] private CharacterControl characterControl;
+        [SerializeField] private Character.Character character;
         [SerializeField] private WoodChopper woodChopper;
         [SerializeField] private EnemyController enemyController;
         [SerializeField] private Attacker attacker;
         
         private void Awake()
         {
-            detector.Initialize();
-            uiSystem.Initialize(detector);
-            characterControl.Initialize(uiSystem.Joystick, uiSystem.ActionButton);
-            woodChopper.Initialize(detector, characterControl.CharacterActionActivator);
-            enemyController.Initialize(characterControl.transform);
-            attacker.Initialize(detector, characterControl.CharacterActionActivator);
+            woodDetector.Initialize();
+            uiSystem.Initialize(woodDetector);
+            character.Initialize(uiSystem.Joystick, uiSystem.ActionButton);
+            woodChopper.Initialize(woodDetector, character.CharacterActionActivator);
+            enemyController.Initialize(character.transform);
+            enemyDetector.Initialize();
+            attacker.Initialize(enemyDetector, character.CharacterActionActivator);
 
             QualitySettings.vSyncCount = 0;
             Application.targetFrameRate = 60;
@@ -31,8 +32,9 @@ namespace Soulcutter.Scripts.Bootstrap
 
         private void Update()
         {
-            detector.UpdatePass();
+            woodDetector.UpdatePass();
             enemyController.UpdatePass();
+            enemyDetector.UpdatePass();
         }
 
         private void FixedUpdate()

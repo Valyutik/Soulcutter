@@ -1,6 +1,6 @@
 using System.Collections;
 using Soulcutter.Scripts.Character;
-using Soulcutter.Scripts.InteractionObjectDetectors;
+using Soulcutter.Scripts.Detectors;
 using UnityEngine;
 
 namespace Soulcutter.Scripts.TreeChopping
@@ -8,11 +8,11 @@ namespace Soulcutter.Scripts.TreeChopping
     public class WoodChopper : MonoBehaviour
     {
         [SerializeField] private int impactForce = 1;
-        private InteractionObjectDetector _detector;
+        private WoodDetector _detector;
         private CharacterActionActivator _characterActionActivator;
         private WaitForSeconds _waitForSeconds;
 
-        public void Initialize(InteractionObjectDetector detector,
+        public void Initialize(WoodDetector detector,
             CharacterActionActivator characterActionActivator)
         {
             _detector = detector;

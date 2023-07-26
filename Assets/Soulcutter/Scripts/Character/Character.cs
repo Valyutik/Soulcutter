@@ -7,14 +7,24 @@ using UnityEngine;
 namespace Soulcutter.Scripts.Character
 {
     [RequireComponent(typeof(Rigidbody2D), typeof(Animator))]
-    public class CharacterControl : MonoBehaviour
+    public class Character : MonoBehaviour
     {
+        [Header("Movement")]
         [Range(0,100)]
         [SerializeField] private float speed;
-        [Range(0,10)]
-        [SerializeField] private float timeCombatAttack;
+        
+        [Header("Chopping")]
         [Range(0,10)]
         [SerializeField] private float timeChop;
+        [Range(0,100)]
+        [SerializeField] private int impactForce = 1;
+        
+        [Header("Combat")]
+        [Range(0,10)]
+        [SerializeField] private float timeCombatAttack;
+        [Range(0,100)]
+        [SerializeField] private int damage = 1;
+        public bool IsLive { get; private set; }
         
         private Rigidbody2D _rigidbody2D;
         private CharacterMovement _characterMovement;

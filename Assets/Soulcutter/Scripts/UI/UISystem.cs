@@ -1,4 +1,4 @@
-using Soulcutter.Scripts.InteractionObjectDetectors;
+using Soulcutter.Scripts.Detectors;
 using Soulcutter.Scripts.UI.ActionButton;
 using Soulcutter.Scripts.UI.Joysticks;
 using UnityEngine;
@@ -11,12 +11,12 @@ namespace Soulcutter.Scripts.UI
         [SerializeField] private Camera uiCamera;
         [SerializeField] private ActionButton.ActionButton actionButton;
         private ActionButtonChanger _actionButtonChanger;
-        private InteractionObjectDetector _detector;
+        private WoodDetector _detector;
 
         public Joystick Joystick => joystick;
         public ActionButton.ActionButton ActionButton => actionButton;
 
-        public void Initialize(InteractionObjectDetector detector)
+        public void Initialize(WoodDetector detector)
         {
             joystick.Initialize(uiCamera);
             actionButton.Initialize();

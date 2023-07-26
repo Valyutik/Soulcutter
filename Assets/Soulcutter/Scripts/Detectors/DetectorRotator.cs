@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Soulcutter.Scripts.InteractionObjectDetectors
+namespace Soulcutter.Scripts.Detectors
 {
     public class DetectorRotator
     {

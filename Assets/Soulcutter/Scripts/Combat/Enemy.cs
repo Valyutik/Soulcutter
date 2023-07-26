@@ -1,4 +1,4 @@
-using NavMeshPlus.Extensions;
+using NavMeshPlus.NavMeshComponents.Scripts;
 using UnityEngine;
 
 namespace Soulcutter.Scripts.Combat
@@ -6,7 +6,10 @@ namespace Soulcutter.Scripts.Combat
     [RequireComponent(typeof(Animator), typeof(AgentOverride2d))]
     public class Enemy : MonoBehaviour
     {
-        [SerializeField] private int health;
+        [Range(0,100)]
+        [SerializeField] private float health;
+        [Range(0,100)]
+        [SerializeField] private int damage;
         private EnemyMovement _enemyMovement;
         private EnemyAnimator _enemyAnimator;
 
@@ -32,9 +35,9 @@ namespace Soulcutter.Scripts.Combat
             }
         }
 
-        public void TakeDamage(int damage)
+        public void TakeDamage(int damageReceived)
         {
-            health -= damage;
+            health -= damageReceived;
             if (health <= 0)
             {
                 Die();
