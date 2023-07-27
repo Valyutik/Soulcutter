@@ -758,51 +758,6 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
---- !u!1 &379020843
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 379020844}
-  - component: {fileID: 379020845}
-  m_Layer: 0
-  m_Name: WoodChopper
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &379020844
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 379020843}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2064269352}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &379020845
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 379020843}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb22e27634054ba89114a3ed86cd4802, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  impactForce: 1
 --- !u!1001 &407016496
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1395,51 +1350,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3439230501775093358, guid: cc56096cb083ec64c968259f386910de, type: 3}
   m_PrefabInstance: {fileID: 609609967}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &611643976
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 611643977}
-  - component: {fileID: 611643978}
-  m_Layer: 0
-  m_Name: Attacker
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &611643977
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 611643976}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2064269352}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &611643978
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 611643976}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ed72c3cfa564ce0b3f9b5aa4210fc38, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 1
 --- !u!1 &666281187
 GameObject:
   m_ObjectHideFlags: 0
@@ -3698,9 +3608,7 @@ MonoBehaviour:
   enemyDetector: {fileID: 1888634524}
   uiSystem: {fileID: 666281189}
   character: {fileID: 1640484634}
-  woodChopper: {fileID: 379020845}
   enemyController: {fileID: 690414600}
-  attacker: {fileID: 611643978}
 --- !u!4 &1357849630
 Transform:
   m_ObjectHideFlags: 0
@@ -84524,8 +84432,6 @@ Transform:
   - {fileID: 440321185}
   - {fileID: 1640484630}
   - {fileID: 690414599}
-  - {fileID: 379020844}
-  - {fileID: 611643977}
   - {fileID: 925336120}
   m_Father: {fileID: 0}
   m_RootOrder: 2

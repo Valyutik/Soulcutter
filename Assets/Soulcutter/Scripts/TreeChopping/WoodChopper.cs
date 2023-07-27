@@ -1,41 +1,30 @@
-using System.Collections;
 using Soulcutter.Scripts.Character;
 using Soulcutter.Scripts.Detectors;
-using UnityEngine;
 
 namespace Soulcutter.Scripts.TreeChopping
 {
-    public class WoodChopper : MonoBehaviour
+    public class WoodChopper
     {
-        [SerializeField] private int impactForce = 1;
-        private WoodDetector _detector;
-        private CharacterActionActivator _characterActionActivator;
-        private WaitForSeconds _waitForSeconds;
+        private readonly int _impactForce;
+        private readonly WoodDetector _detector;
+        private readonly CharacterActionActivator _characterActionActivator;
 
-        public void Initialize(WoodDetector detector,
-            CharacterActionActivator characterActionActivator)
+        public WoodChopper(WoodDetector detector, CharacterActionActivator characterActionActivator, int impactForce)
         {
             _detector = detector;
             _characterActionActivator = characterActionActivator;
-            _waitForSeconds = new WaitForSeconds(_characterActionActivator.TimeChop / 3f);
-
-            _characterActionActivator.OnActivatedChopEvent += StartCoroutineChopWood;
+            _impactForce = impactForce;
+            _characterActionActivator.OnActivatedChopEvent += ChopWood;
         }
 
-        private void OnDisable()
+        public void Deconstruct()
         {
-            _characterActionActivator.OnActivatedChopEvent -= StartCoroutineChopWood;
+            _characterActionActivator.OnActivatedChopEvent -= ChopWood;
         }
 
-        private void StartCoroutineChopWood()
+        private void ChopWood()
         {
-            StartCoroutine(ChopWood());
-        }
-
-        private IEnumerator ChopWood()
-        {
-            yield return _waitForSeconds;
-            _detector.CurrentWood.TakeDamage(impactForce);
+            _detector.CurrentWood.TakeDamage(_impactForce);
         }
     }
 }
