@@ -8,10 +8,10 @@ namespace Soulcutter.Scripts.Character
     public class CharacterActionActivator
     {
         public event Action OnActivatedChopEvent, OnActivatedCombatAttackEvent;
-        
-        public float TimeChop { get; }
 
-        public float TimeCombatAttack { get; }
+        private float TimeChop { get; }
+
+        private float TimeCombatAttack { get; }
 
         private readonly ActionButton _actionButton;
         private readonly CharacterActionAnimator _characterActionAnimator;
@@ -24,8 +24,7 @@ namespace Soulcutter.Scripts.Character
             _isAction = true;
             _actionButton = actionButton;
             _characterActionAnimator = new CharacterActionAnimator(animator);
-            _listenerAttackAndChopAnimationState = 
-                _characterActionAnimator.ListenerAttackAndChopAnimationState;
+            _listenerAttackAndChopAnimationState = _characterActionAnimator.ListenerAttackAndChopAnimationState;
             TimeChop = timeChop;
             TimeCombatAttack = timeCombatAttack;
 
