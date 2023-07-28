@@ -4,32 +4,34 @@ namespace Soulcutter.Scripts.Detectors
 {
     public class DetectorRotator
     {
-        private readonly BoxCollider2D _boxCollider2D;
-        private readonly Vector2 _rightPosition = new(0.72f, 0);
-        private readonly Vector2 _frontPosition = new(0, -0.55f);
+        private readonly Transform _transform;
 
-        public DetectorRotator( BoxCollider2D boxCollider2D)
+        private readonly Vector3 _rightRotate = new(0, 0, 90);
+        private readonly Vector3 _frontRotate = new(0, 0, 0);
+        private readonly Vector3 _backRotate = new(0, 0, 180);
+
+        public DetectorRotator(Transform transform)
         {
-            _boxCollider2D = boxCollider2D;
+            _transform = transform;
         }
 
         public void SetDirectionDetector(Vector2 velocity)
         {
             if (velocity.y < velocity.x && -velocity.y < velocity.x)
             {
-                _boxCollider2D.offset = _rightPosition;
+                _transform.rotation = Quaternion.Euler(_rightRotate);
             }
             else if (velocity.y < velocity.x && -velocity.y > velocity.x)
             {
-                _boxCollider2D.offset = _frontPosition;
+                _transform.rotation = Quaternion.Euler(_frontRotate);
             }
             else if (velocity.y > velocity.x && -velocity.y > velocity.x)
             {
-                _boxCollider2D.offset = -_rightPosition;
+                _transform.rotation = Quaternion.Euler(-_rightRotate);
             }
             else if (velocity.y > velocity.x && -velocity.y < velocity.x)
             {
-                _boxCollider2D.offset = -_frontPosition;
+                _transform.rotation = Quaternion.Euler(_backRotate);
             }
         }
     }

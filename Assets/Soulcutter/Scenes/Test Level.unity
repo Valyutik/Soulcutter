@@ -83507,9 +83507,10 @@ MonoBehaviour:
   speed: 5
   timeChop: 0.5
   impactForce: 1
-  health: 3
+  health: 25
   timeCombatAttack: 0.5
   damage: 1
+  detectorRange: 0
 --- !u!50 &1640484635
 Rigidbody2D:
   serializedVersion: 4

@@ -10,12 +10,16 @@ namespace Soulcutter.Scripts.Detectors
         private NavMeshAgent _agent;
         public Character.Character Character { get; private set; }
 
-        public override void Initialize()
+        public override void Initialize(float detectorRange)
         {
             var boxCollider2D = GetComponent<BoxCollider2D>();
             boxCollider2D.isTrigger = true;
             _agent = GetComponentInParent<NavMeshAgent>();
-            DetectorRotator = new DetectorRotator(boxCollider2D);
+            
+            DetectorRotator = new DetectorRotator(transform);
+            DetectorRangeChanger = new DetectorRangeChanger(boxCollider2D);
+            
+            DetectorRangeChanger.SetRangeDetector(detectorRange);
         }
 
         public override void UpdatePass()

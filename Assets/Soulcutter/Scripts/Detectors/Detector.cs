@@ -6,14 +6,19 @@ namespace Soulcutter.Scripts.Detectors
     public abstract class Detector : MonoBehaviour
     {
         protected DetectorRotator DetectorRotator;
+        protected DetectorRangeChanger DetectorRangeChanger;
         private Rigidbody2D _rigidbody2D;
         
-        public virtual void Initialize()
+        public virtual void Initialize(float detectorRange)
         {
             var boxCollider2D = GetComponent<BoxCollider2D>();
             boxCollider2D.isTrigger = true;
             _rigidbody2D = GetComponentInParent<Rigidbody2D>();
-            DetectorRotator = new DetectorRotator(boxCollider2D);
+            
+            DetectorRotator = new DetectorRotator(transform);
+            DetectorRangeChanger = new DetectorRangeChanger(boxCollider2D);
+            
+            DetectorRangeChanger.SetRangeDetector(detectorRange);
         }
 
         public virtual void UpdatePass()

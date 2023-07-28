@@ -15,6 +15,8 @@ namespace Soulcutter.Scripts.Combat
         [SerializeField] private float attackTime;
         [Range(0,10)]
         [SerializeField] private float attackDelay;
+        [Range(0,10)]
+        [SerializeField] private float detectorRange;
         private EnemyMovement _enemyMovement;
         private EnemyAnimator _enemyAnimator;
         private EnemyAttacker _enemyAttacker;
@@ -25,7 +27,7 @@ namespace Soulcutter.Scripts.Combat
             _enemyMovement = new EnemyMovement(GetComponent<AgentOverride2d>());
             _enemyAnimator = new EnemyAnimator(GetComponent<Animator>());
             _characterDetector = GetComponentInChildren<CharacterDetector>();
-            _characterDetector.Initialize();
+            _characterDetector.Initialize(detectorRange);
             _enemyAttacker = new EnemyAttacker(attackTime, attackDelay, damage, _enemyAnimator, _enemyMovement,
                 _characterDetector);
             

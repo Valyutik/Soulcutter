@@ -30,6 +30,9 @@ namespace Soulcutter.Scripts.Character
         [Range(0,100)]
         [SerializeField] private int damage = 1;
         
+        [Range(0,10)]
+        [SerializeField] private float detectorRange;
+        
         public bool IsLive { get; private set; }
         
         private Rigidbody2D _rigidbody2D;
