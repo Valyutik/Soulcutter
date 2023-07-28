@@ -83507,6 +83507,7 @@ MonoBehaviour:
   speed: 5
   timeChop: 0.5
   impactForce: 1
+  health: 3
   timeCombatAttack: 0.5
   damage: 1
 --- !u!50 &1640484635

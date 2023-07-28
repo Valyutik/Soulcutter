@@ -1,4 +1,5 @@
 using NavMeshPlus.Extensions;
+using Soulcutter.Scripts.Detectors;
 using UnityEngine;
 
 namespace Soulcutter.Scripts.Combat
@@ -7,16 +8,28 @@ namespace Soulcutter.Scripts.Combat
     public class Enemy : MonoBehaviour
     {
         [Range(0,100)]
-        [SerializeField] private float health;
+        [SerializeField] private int health;
         [Range(0,100)]
         [SerializeField] private int damage;
+        [Range(0,10)]
+        [SerializeField] private float attackTime;
+        [Range(0,10)]
+        [SerializeField] private float attackDelay;
         private EnemyMovement _enemyMovement;
         private EnemyAnimator _enemyAnimator;
+        private EnemyAttacker _enemyAttacker;
+        private CharacterDetector _characterDetector;
 
         public void Initialize()
         {
             _enemyMovement = new EnemyMovement(GetComponent<AgentOverride2d>());
             _enemyAnimator = new EnemyAnimator(GetComponent<Animator>());
+            _characterDetector = GetComponentInChildren<CharacterDetector>();
+            _characterDetector.Initialize();
+            _enemyAttacker = new EnemyAttacker(attackTime, attackDelay, damage, _enemyAnimator, _enemyMovement,
+                _characterDetector);
+            
+            _characterDetector.OnTriggerWithCharacter += _enemyAttacker.OnAttack;
         }
 
         public void UpdatePass(Vector2 point)
@@ -33,6 +46,8 @@ namespace Soulcutter.Scripts.Combat
             {
                 _enemyAnimator.SetRunAnimation();
             }
+            
+            _characterDetector.UpdatePass();
         }
 
         public void TakeDamage(int damageReceived)

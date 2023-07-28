@@ -5,19 +5,20 @@ namespace Soulcutter.Scripts.Detectors
     [RequireComponent(typeof(BoxCollider2D))]
     public abstract class Detector : MonoBehaviour
     {
-        private DetectorRotator _detectorRotator;
+        protected DetectorRotator DetectorRotator;
+        private Rigidbody2D _rigidbody2D;
         
-        public void Initialize()
+        public virtual void Initialize()
         {
             var boxCollider2D = GetComponent<BoxCollider2D>();
             boxCollider2D.isTrigger = true;
-            _detectorRotator = new DetectorRotator(GetComponentInParent<Rigidbody2D>(),
-                boxCollider2D);
+            _rigidbody2D = GetComponentInParent<Rigidbody2D>();
+            DetectorRotator = new DetectorRotator(boxCollider2D);
         }
 
-        public void UpdatePass()
+        public virtual void UpdatePass()
         {
-            _detectorRotator.SetDirectionDetector();
+            DetectorRotator.SetDirectionDetector(_rigidbody2D.velocity.normalized);
         }
 
         protected abstract void OnTriggerEnter2D(Collider2D other);
