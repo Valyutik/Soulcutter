@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Soulcutter.Scripts.Combat
+namespace Soulcutter.Scripts.Combat.Enemies
 {
     public class EnemyAnimator
     {

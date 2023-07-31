@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Soulcutter.Scripts.Character.Animators;
 using Soulcutter.Scripts.UI.ActionButton;
 using UnityEngine;
@@ -44,17 +45,19 @@ namespace Soulcutter.Scripts.Character
 
         private void OnActivatedAction() => _isAction = true;
 
-        private void OnActivatedChop()
+        private async void OnActivatedChop()
         {
             if (!_isAction) return;
             _characterActionAnimator.SetChopAnimation(TimeChop);
+            await Task.Delay(Convert.ToInt32(TimeChop * 1000) / 2);
             OnActivatedChopEvent?.Invoke();
             _isAction = false;
         }
-        private void OnActivatedCombatAttack()
+        private async void OnActivatedCombatAttack()
         {
             if (!_isAction) return;
             _characterActionAnimator.SetAttackAnimation(TimeCombatAttack);
+            await Task.Delay(Convert.ToInt32(TimeCombatAttack * 1000) / 2);
             OnActivatedCombatAttackEvent?.Invoke();
             _isAction = false;
         }

@@ -1,4 +1,4 @@
-using Soulcutter.Scripts.Combat;
+using Soulcutter.Scripts.Combat.Enemies;
 using Soulcutter.Scripts.Detectors;
 using Soulcutter.Scripts.UI;
 using UnityEngine;

@@ -2,7 +2,7 @@ using System;
 using Soulcutter.Scripts.Detectors;
 using Task = System.Threading.Tasks.Task;
 
-namespace Soulcutter.Scripts.Combat
+namespace Soulcutter.Scripts.Combat.Enemies
 {
     public class EnemyAttacker
     {

@@ -2,7 +2,7 @@ using NavMeshPlus.Extensions;
 using Soulcutter.Scripts.Detectors;
 using UnityEngine;
 
-namespace Soulcutter.Scripts.Combat
+namespace Soulcutter.Scripts.Combat.Enemies
 {
     [RequireComponent(typeof(Animator), typeof(AgentOverride2d))]
     public class Enemy : MonoBehaviour
