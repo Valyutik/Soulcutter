@@ -17,7 +17,7 @@ namespace Soulcutter.Scripts.Bootstrap
         {
             woodDetector.Initialize(1f);
             uiSystem.Initialize(woodDetector);
-            character.Initialize(uiSystem.Joystick, uiSystem.ActionButton, woodDetector, enemyDetector);
+            character.Initialize(uiSystem.Joystick, uiSystem.ActionButton, uiSystem.DeathScreen, woodDetector, enemyDetector);
             enemyController.Initialize(character.transform);
             enemyDetector.Initialize(1f);
 
