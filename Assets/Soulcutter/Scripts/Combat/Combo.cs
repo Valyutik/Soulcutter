@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace Soulcutter.Scripts.Combat
 {
@@ -21,6 +22,7 @@ namespace Soulcutter.Scripts.Combat
         public void AddComboPoint()
         {
             _currentComboPoint++;
+            Debug.Log(_currentComboPoint);
             CheckComboPointThreshold();
             ComboResetTimer();
         }

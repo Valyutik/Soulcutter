@@ -1,4 +1,3 @@
-using System;
 using NavMeshPlus.Extensions;
 using Soulcutter.Scripts.Detectors;
 using UnityEngine;

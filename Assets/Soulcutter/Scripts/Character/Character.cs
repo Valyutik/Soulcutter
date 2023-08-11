@@ -39,7 +39,7 @@ namespace Soulcutter.Scripts.Character
         [SerializeField] private int specialDamage;
         
         [Space]
-        [Range(0, 100)]
+        [Range(0, 10)]
         [SerializeField] private int pointComboThreshold;
         [Range(0, 10)]
         [SerializeField] private float comboResetTime;

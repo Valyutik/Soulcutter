@@ -46,9 +46,6 @@ namespace Soulcutter.Scripts.Character
 
         public async void OnActivatedSpecialAttack()
         {
-            if (!_isAction) return;
-            _isAction = false;
-            await Task.Delay(Convert.ToInt32(TimeAttack * 1000) / 2);
             _characterActionAnimator.SetSpecialAttackAnimation(TimeSpecialAttack);
             await Task.Delay(Convert.ToInt32(TimeSpecialAttack * 1000) / 2);
             OnActivatedSpecialAttackEvent?.Invoke();
