@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,6 +18,14 @@ namespace Soulcutter.Scripts.Combat.Enemies
             foreach (var enemy in _enemies)
             {
                 enemy.Initialize();
+            }
+        }
+
+        private void OnDisable()
+        {
+            foreach (var enemy in _enemies)
+            {
+                enemy.gameObject.SetActive(false);
             }
         }
 
