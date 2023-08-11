@@ -20,6 +20,14 @@ namespace Soulcutter.Scripts.Combat.Enemies
             }
         }
 
+        private void OnDisable()
+        {
+            foreach (var enemy in _enemies)
+            {
+                enemy.gameObject.SetActive(false);
+            }
+        }
+
         public void UpdatePass()
         {
             foreach (var enemy in _enemies)

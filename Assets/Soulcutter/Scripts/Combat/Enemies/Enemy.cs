@@ -1,3 +1,4 @@
+using System;
 using NavMeshPlus.Extensions;
 using Soulcutter.Scripts.Detectors;
 using UnityEngine;
@@ -32,6 +33,11 @@ namespace Soulcutter.Scripts.Combat.Enemies
                 _characterDetector);
             
             _characterDetector.OnTriggerWithCharacter += _enemyAttacker.OnAttack;
+        }
+
+        private void OnDisable()
+        {
+            _characterDetector.OnTriggerWithCharacter -= _enemyAttacker.OnAttack;
         }
 
         public void UpdatePass(Vector2 point)
