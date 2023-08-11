@@ -8,11 +8,11 @@ namespace Soulcutter.Scripts.Character
 {
     public class CharacterActionActivator
     {
-        public event Action OnActivatedChopEvent, OnActivatedCombatAttackEvent;
+        public event Action OnActivatedChopEvent, OnActivatedAttackEvent, OnActivatedSpecialAttackEvent;
 
         private float TimeChop { get; }
-
-        private float TimeCombatAttack { get; }
+        private float TimeAttack { get; }
+        private float TimeSpecialAttack { get; }
 
         private readonly ActionButton _actionButton;
         private readonly CharacterActionAnimator _characterActionAnimator;
@@ -20,16 +20,17 @@ namespace Soulcutter.Scripts.Character
         private bool _isAction;
 
         public CharacterActionActivator(ActionButton actionButton, Animator animator,
-            float timeChop, float timeCombatAttack)
+            float timeChop, float timeAttack, float timeSpecialAttack)
         {
             _isAction = true;
             _actionButton = actionButton;
             _characterActionAnimator = new CharacterActionAnimator(animator);
             _listenerAttackAndChopAnimationState = _characterActionAnimator.ListenerAttackAndChopAnimationState;
             TimeChop = timeChop;
-            TimeCombatAttack = timeCombatAttack;
+            TimeAttack = timeAttack;
+            TimeSpecialAttack = timeSpecialAttack;
 
-            _actionButton.OnPressAttackEvent += OnActivatedCombatAttack;
+            _actionButton.OnPressAttackEvent += OnActivatedAttack;
             _actionButton.OnPressChopEvent += OnActivatedChop;
 
             _listenerAttackAndChopAnimationState.OnStateExitEvent += OnActivatedAction;
@@ -37,29 +38,39 @@ namespace Soulcutter.Scripts.Character
 
         public void Deconstruct()
         {
-            _actionButton.OnPressAttackEvent -= OnActivatedCombatAttack;
+            _actionButton.OnPressAttackEvent -= OnActivatedAttack;
             _actionButton.OnPressChopEvent -= OnActivatedChop;
 
             _listenerAttackAndChopAnimationState.OnStateExitEvent -= OnActivatedAction;
         }
 
+        public async void OnActivatedSpecialAttack()
+        {
+            if (!_isAction) return;
+            _isAction = false;
+            await Task.Delay(Convert.ToInt32(TimeAttack * 1000) / 2);
+            _characterActionAnimator.SetSpecialAttackAnimation(TimeSpecialAttack);
+            await Task.Delay(Convert.ToInt32(TimeSpecialAttack * 1000) / 2);
+            OnActivatedSpecialAttackEvent?.Invoke();
+        }
+        
         private void OnActivatedAction() => _isAction = true;
 
         private async void OnActivatedChop()
         {
             if (!_isAction) return;
+            _isAction = false;
             _characterActionAnimator.SetChopAnimation(TimeChop);
             await Task.Delay(Convert.ToInt32(TimeChop * 1000) / 2);
             OnActivatedChopEvent?.Invoke();
-            _isAction = false;
         }
-        private async void OnActivatedCombatAttack()
+        private async void OnActivatedAttack()
         {
             if (!_isAction) return;
-            _characterActionAnimator.SetAttackAnimation(TimeCombatAttack);
-            await Task.Delay(Convert.ToInt32(TimeCombatAttack * 1000) / 2);
-            OnActivatedCombatAttackEvent?.Invoke();
             _isAction = false;
+            _characterActionAnimator.SetAttackAnimation(TimeAttack);
+            await Task.Delay(Convert.ToInt32(TimeAttack * 1000) / 2);
+            OnActivatedAttackEvent?.Invoke();
         }
     }
 }

@@ -1507,7 +1507,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 690414598}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f3fea07904a64ee58316e1506b64e774, type: 3}
   m_Name: 
@@ -83508,9 +83508,13 @@ MonoBehaviour:
   timeChop: 0.5
   impactForce: 1
   health: 25
-  timeCombatAttack: 0.5
+  timeAttack: 0.5
+  timeSpecialAttack: 0.5
   damage: 1
-  detectorRange: 0
+  specialDamage: 2
+  pointComboThreshold: 5
+  comboResetTime: 5
+  detectorRange: 1
 --- !u!50 &1640484635
 Rigidbody2D:
   serializedVersion: 4

@@ -25,10 +25,24 @@ namespace Soulcutter.Scripts.Character
         [Header("Combat")]
         [Range(0, 100)]
         [SerializeField] private int health;
+        
+        [Space]
         [Range(0,10)]
-        [SerializeField] private float timeCombatAttack;
-        [Range(0,100)]
-        [SerializeField] private int damage = 1;
+        [SerializeField] private float timeAttack;
+        [Range(0,10)]
+        [SerializeField] private float timeSpecialAttack;
+        
+        [Space]
+        [Range(0, 100)]
+        [SerializeField] private int damage;
+        [Range(0, 100)]
+        [SerializeField] private int specialDamage;
+        
+        [Space]
+        [Range(0, 100)]
+        [SerializeField] private int pointComboThreshold;
+        [Range(0, 10)]
+        [SerializeField] private float comboResetTime;
         
         [Range(0,10)]
         [SerializeField] private float detectorRange;
@@ -68,10 +82,11 @@ namespace Soulcutter.Scripts.Character
             _listenerAttackAndChopAnimationState.OnStateExitEvent += _characterMovement.EnableMovement;
 
             CharacterActionActivator = new CharacterActionActivator(actionButton,
-                animator,timeChop, timeCombatAttack);
+                animator, timeChop, timeAttack, timeSpecialAttack);
 
             _woodChopper = new WoodChopper(woodDetector, CharacterActionActivator, impactForce);
-            _characterAttacker = new CharacterAttacker(enemyDetector, CharacterActionActivator, damage);
+            _characterAttacker = new CharacterAttacker(enemyDetector, CharacterActionActivator,
+                damage, specialDamage, pointComboThreshold, comboResetTime);
         }
 
         private void OnDisable()
