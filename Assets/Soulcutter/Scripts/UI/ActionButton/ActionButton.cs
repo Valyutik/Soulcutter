@@ -63,5 +63,9 @@ namespace Soulcutter.Scripts.UI.ActionButton
                     throw new ArgumentOutOfRangeException();
             }
         }
+
+        public void Inable() => gameObject.SetActive(true);
+
+        public void Disable() => gameObject.SetActive(false);
     }
 }

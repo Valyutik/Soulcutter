@@ -141,6 +141,9 @@ namespace Soulcutter.Scripts.UI.Joysticks
 
         public void OnBeginDrag(PointerEventData eventData) => OnBeginDragEvent?.Invoke();
         public void OnEndDrag(PointerEventData eventData) => OnEndDragEvent?.Invoke();
+        public void Inable() => gameObject.SetActive(true);
+
+        public void Disable() => gameObject.SetActive(false);
     }
 
     public enum AxisOptions { Both, Horizontal, Vertical }

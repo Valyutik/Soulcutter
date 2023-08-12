@@ -58,14 +58,17 @@ namespace Soulcutter.Scripts.Character
         private ActionButton _actionButton;
         private WoodChopper _woodChopper;
         private CharacterAttacker _characterAttacker;
+        private DeathScreen _deathScreen;
 
         private CharacterActionActivator CharacterActionActivator { get; set; }
 
-        public void Initialize(Joystick joystick, ActionButton actionButton,
+        public void Initialize(Joystick joystick, ActionButton actionButton, DeathScreen deathScreen,
             WoodDetector woodDetector, EnemyDetector enemyDetector)
         {
             _rigidbody2D = GetComponent<Rigidbody2D>();
             var animator = GetComponent<Animator>();
+
+            _deathScreen = deathScreen;
             
             _characterMovement = new CharacterMovement(_rigidbody2D, speed);
             _joystick = joystick;
@@ -117,6 +120,7 @@ namespace Soulcutter.Scripts.Character
         private void Die()
         {
             gameObject.SetActive(false);
+            _deathScreen.ShowScreen();
         }
     }
 }
