@@ -1,13 +1,13 @@
 using System;
-using System.Threading.Tasks;
-using UnityEngine;
+using Soulcutter.Scripts.Services;
 
 namespace Soulcutter.Scripts.Combat
 {
     public class Combo
     {
         public event Action OnActivatedSpecialAttackEvent;
-        
+
+        private readonly SyncedTimer _syncedTimer;
         private readonly int _pointComboThreshold;
         private readonly float _comboResetTime;
         private int _currentComboPoint;
@@ -17,14 +17,20 @@ namespace Soulcutter.Scripts.Combat
         {
             _pointComboThreshold = pointComboThreshold;
             _comboResetTime = comboResetTime;
+            _syncedTimer = new SyncedTimer(TimerType.UpdateTick, _comboResetTime);
+            _syncedTimer.TimerFinished += ComboPointReset;
+        }
+
+        public void Deconstruct()
+        {
+            _syncedTimer.TimerFinished -= ComboPointReset;
         }
 
         public void AddComboPoint()
         {
             _currentComboPoint++;
-            Debug.Log(_currentComboPoint);
+            _syncedTimer.Start(_comboResetTime);
             CheckComboPointThreshold();
-            ComboResetTimer();
         }
 
         private void CheckComboPointThreshold()
@@ -34,13 +40,9 @@ namespace Soulcutter.Scripts.Combat
             _currentComboPoint = 0;
         }
 
-        private async void ComboResetTimer()
+        private void ComboPointReset()
         {
-            if (_isTimerEnabled) return;
-            _isTimerEnabled = true;
-            await Task.Delay(Convert.ToInt32(_comboResetTime * 1000));
             _currentComboPoint = 0;
-            _isTimerEnabled = false;
         }
     }
 }

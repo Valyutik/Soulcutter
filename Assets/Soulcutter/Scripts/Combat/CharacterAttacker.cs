@@ -28,6 +28,8 @@ namespace Soulcutter.Scripts.Combat
 
         public void Deconstruct()
         {
+            _combo.Deconstruct();
+            
             _characterActionActivator.OnActivatedAttackEvent -= OnAttack;
             _characterActionActivator.OnActivatedSpecialAttackEvent -= OnSpecialAttack;
             _combo.OnActivatedSpecialAttackEvent -= _characterActionActivator.OnActivatedSpecialAttack;
