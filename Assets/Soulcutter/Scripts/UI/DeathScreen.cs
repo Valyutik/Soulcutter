@@ -9,7 +9,7 @@ public class DeathScreen : MonoBehaviour, IPointerDownHandler
     private Joystick _joystick;
     private ActionButton _actionButton;
 
-    public void Inizialize(Joystick joystick, ActionButton actionButton)
+    public void Initialize(Joystick joystick, ActionButton actionButton)
     {
         _joystick = joystick;
         _actionButton = actionButton;
