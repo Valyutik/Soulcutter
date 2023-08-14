@@ -11,18 +11,20 @@ namespace Soulcutter.Scripts.UI
         [SerializeField] private Camera uiCamera;
         [SerializeField] private DeathScreen deathScreen;
         [SerializeField] private ActionButton.ActionButton actionButton;
+        [SerializeField] private HealthBar healthBar;
         private ActionButtonChanger _actionButtonChanger;
         private WoodDetector _detector;
 
         public Joystick Joystick => joystick;
         public ActionButton.ActionButton ActionButton => actionButton;
         public DeathScreen DeathScreen => deathScreen;
-
+        public HealthBar HealthBar => healthBar;
         public void Initialize(WoodDetector detector)
         {
             joystick.Initialize(uiCamera);
             actionButton.Initialize();
-            deathScreen.Inizialize(joystick, actionButton);
+            deathScreen.Initialize(joystick, actionButton);
+            healthBar.Initialize();
             _actionButtonChanger = new ActionButtonChanger(actionButton);
             _detector = detector;
             

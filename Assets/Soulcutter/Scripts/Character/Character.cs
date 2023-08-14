@@ -3,6 +3,7 @@ using Soulcutter.Scripts.Character.Movement;
 using Soulcutter.Scripts.Combat;
 using Soulcutter.Scripts.Detectors;
 using Soulcutter.Scripts.TreeChopping;
+using Soulcutter.Scripts.UI;
 using Soulcutter.Scripts.UI.ActionButton;
 using Soulcutter.Scripts.UI.Joysticks;
 using UnityEngine;
@@ -59,16 +60,20 @@ namespace Soulcutter.Scripts.Character
         private WoodChopper _woodChopper;
         private CharacterAttacker _characterAttacker;
         private DeathScreen _deathScreen;
+        private HealthBar _healthBar;
 
         private CharacterActionActivator CharacterActionActivator { get; set; }
 
-        public void Initialize(Joystick joystick, ActionButton actionButton, DeathScreen deathScreen,
+        public void Initialize(Joystick joystick, ActionButton actionButton, DeathScreen deathScreen, HealthBar healthBar,
             WoodDetector woodDetector, EnemyDetector enemyDetector)
         {
             _rigidbody2D = GetComponent<Rigidbody2D>();
             var animator = GetComponent<Animator>();
 
             _deathScreen = deathScreen;
+            _healthBar = healthBar;
+            
+            _healthBar.GetFullHealth(health);
             
             _characterMovement = new CharacterMovement(_rigidbody2D, speed);
             _joystick = joystick;
@@ -111,6 +116,7 @@ namespace Soulcutter.Scripts.Character
         public void TakeDamage(int damageReceived)
         {
             health -= damageReceived;
+            _healthBar.ChangeHealthLine(health);
             if (health <= 0)
             {
                 Die();
