@@ -9,15 +9,18 @@ namespace Soulcutter.Scripts.Combat.Enemies
         [SerializeField] private Enemy enemyPrefab;
         private readonly List<Enemy> _enemies = new();
         private Transform _characterTransform;
+        private Character.Character _character;
 
-        public void Initialize(Transform characterTransform)
+        public void Initialize(Character.Character character)
         {
+            _character = character;
+            
             _enemies.Add(Instantiate(enemyPrefab, new Vector3(-15, 0), Quaternion.identity, transform));
-            _characterTransform = characterTransform;
+            _characterTransform = character.transform;
 
             foreach (var enemy in _enemies)
             {
-                enemy.Initialize();
+                enemy.Initialize(_character);
             }
         }
 

@@ -21,13 +21,16 @@ namespace Soulcutter.Scripts.Combat.Enemies
         private EnemyAnimator _enemyAnimator;
         private EnemyAttacker _enemyAttacker;
         private CharacterDetector _characterDetector;
+        private Character.Character _character;
 
-        public void Initialize()
+        public void Initialize(Character.Character character)
         {
+            _character = character;
+            
             _enemyMovement = new EnemyMovement(GetComponent<AgentOverride2d>());
             _enemyAnimator = new EnemyAnimator(GetComponent<Animator>());
             _characterDetector = GetComponentInChildren<CharacterDetector>();
-            _characterDetector.Initialize(detectorRange);
+            _characterDetector.Initialize(detectorRange, _character);
             _enemyAttacker = new EnemyAttacker(attackTime, attackDelay, damage, _enemyAnimator, _enemyMovement,
                 _characterDetector);
             

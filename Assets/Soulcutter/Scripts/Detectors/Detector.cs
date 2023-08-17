@@ -7,13 +7,14 @@ namespace Soulcutter.Scripts.Detectors
     {
         protected DetectorRotator DetectorRotator;
         protected DetectorRangeChanger DetectorRangeChanger;
-        private Rigidbody2D _rigidbody2D;
+        private Character.Character _character;
         
-        public virtual void Initialize(float detectorRange)
+        public virtual void Initialize(float detectorRange, Character.Character character)
         {
+            _character = character;
+            
             var boxCollider2D = GetComponent<BoxCollider2D>();
             boxCollider2D.isTrigger = true;
-            _rigidbody2D = GetComponentInParent<Rigidbody2D>();
             
             DetectorRotator = new DetectorRotator(transform);
             DetectorRangeChanger = new DetectorRangeChanger(boxCollider2D);
@@ -23,7 +24,7 @@ namespace Soulcutter.Scripts.Detectors
 
         public virtual void UpdatePass()
         {
-            DetectorRotator.SetDirectionDetector(_rigidbody2D.velocity.normalized);
+            DetectorRotator.SetDirectionDetector(_character.joystick.Direction);
         }
 
         protected abstract void OnTriggerEnter2D(Collider2D other);

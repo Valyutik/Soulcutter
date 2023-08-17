@@ -12,7 +12,7 @@ namespace Soulcutter.Scripts.UI.Joysticks
 
         private float Horizontal => (snapX) ? SnapFloat(_input.x, AxisOptions.Horizontal) : _input.x;
         private float Vertical => (snapY) ? SnapFloat(_input.y, AxisOptions.Vertical) : _input.y;
-        private Vector2 Direction => new(Horizontal, Vertical);
+        public Vector2 Direction => new(Horizontal, Vertical);
         public float HandleRange
         {
             set => handleRange = Mathf.Abs(value);

@@ -7,6 +7,7 @@ using Soulcutter.Scripts.UI;
 using Soulcutter.Scripts.UI.ActionButton;
 using Soulcutter.Scripts.UI.Joysticks;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Soulcutter.Scripts.Character
 {
@@ -55,7 +56,7 @@ namespace Soulcutter.Scripts.Character
         private CharacterMovementAnimator _characterMovementAnimator;
         private CharacterActionActivator _characterActionActivator;
         private ListenerAttackAndChopAnimationState _listenerAttackAndChopAnimationState;
-        private Joystick _joystick;
+        public Joystick joystick;
         private ActionButton _actionButton;
         private WoodChopper _woodChopper;
         private CharacterAttacker _characterAttacker;
@@ -76,14 +77,14 @@ namespace Soulcutter.Scripts.Character
             _healthBar.GetFullHealth(health);
             
             _characterMovement = new CharacterMovement(_rigidbody2D, speed);
-            _joystick = joystick;
+            this.joystick = joystick;
             joystick.OnDragEvent += _characterMovement.Move;
             
             _characterMovementAnimator = new CharacterMovementAnimator(animator);
 
             _characterMovement.OnPlayerMoveEvent += _characterMovementAnimator.SetDirectionAnimation;
-            _joystick.OnBeginDragEvent += _characterMovementAnimator.SetRunAnimation;
-            _joystick.OnEndDragEvent += _characterMovementAnimator.SetIdleAnimation;
+            this.joystick.OnBeginDragEvent += _characterMovementAnimator.SetRunAnimation;
+            this.joystick.OnEndDragEvent += _characterMovementAnimator.SetIdleAnimation;
 
             _listenerAttackAndChopAnimationState = animator.GetBehaviour<ListenerAttackAndChopAnimationState>();
             _listenerAttackAndChopAnimationState.OnStateEnterEvent += _characterMovement.DisableMovement;
@@ -99,11 +100,11 @@ namespace Soulcutter.Scripts.Character
 
         private void OnDisable()
         {
-            _joystick.OnDragEvent -= _characterMovement.Move;
+            joystick.OnDragEvent -= _characterMovement.Move;
             
             _characterMovement.OnPlayerMoveEvent -= _characterMovementAnimator.SetDirectionAnimation;
-            _joystick.OnBeginDragEvent -= _characterMovementAnimator.SetRunAnimation;
-            _joystick.OnEndDragEvent -= _characterMovementAnimator.SetIdleAnimation;
+            joystick.OnBeginDragEvent -= _characterMovementAnimator.SetRunAnimation;
+            joystick.OnEndDragEvent -= _characterMovementAnimator.SetIdleAnimation;
             
             _listenerAttackAndChopAnimationState.OnStateEnterEvent += _characterMovement.DisableMovement;
             _listenerAttackAndChopAnimationState.OnStateExitEvent += _characterMovement.EnableMovement;
