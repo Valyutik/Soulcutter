@@ -9,7 +9,8 @@ namespace Soulcutter.Scripts.Combat.Enemies
         private static readonly int IsRun = Animator.StringToHash("IsRun");
         private static readonly int VelocityX = Animator.StringToHash("Velocity X");
         private static readonly int VelocityY = Animator.StringToHash("Velocity Y");
-
+        private static readonly int IsDead = Animator.StringToHash("IsDead");
+        
         private Vector2 _direction;
         private readonly Animator _animator;
 
@@ -41,6 +42,11 @@ namespace Soulcutter.Scripts.Combat.Enemies
             if (direction == Vector2.zero) return;
             _animator.SetFloat(VelocityX, direction.x);
             _animator.SetFloat(VelocityY, direction.y);
+        }
+        
+        public void SetDieAnimation()
+        {
+            _animator.SetTrigger(IsDead);
         }
     }
 }

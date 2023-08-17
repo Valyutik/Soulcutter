@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using NavMeshPlus.Extensions;
 using Soulcutter.Scripts.Detectors;
 using UnityEngine;
@@ -7,6 +8,8 @@ namespace Soulcutter.Scripts.Combat.Enemies
     [RequireComponent(typeof(Animator), typeof(AgentOverride2d))]
     public class Enemy : MonoBehaviour
     {
+        public bool IsLive { get; private set; }
+        
         [Range(0,100)]
         [SerializeField] private int health;
         [Range(0,100)]
@@ -24,6 +27,8 @@ namespace Soulcutter.Scripts.Combat.Enemies
 
         public void Initialize()
         {
+            IsLive = true;
+            
             _enemyMovement = new EnemyMovement(GetComponent<AgentOverride2d>());
             _enemyAnimator = new EnemyAnimator(GetComponent<Animator>());
             _characterDetector = GetComponentInChildren<CharacterDetector>();
@@ -41,7 +46,7 @@ namespace Soulcutter.Scripts.Combat.Enemies
 
         public void UpdatePass(Vector2 point)
         {
-            if (!isActiveAndEnabled) return;
+            if (!isActiveAndEnabled || !IsLive) return;
             _enemyMovement.SetDirection(point);
             
             _enemyAnimator.SetDirectionAnimation(_enemyMovement.Velocity);
@@ -66,8 +71,12 @@ namespace Soulcutter.Scripts.Combat.Enemies
             }
         }
 
-        private void Die()
+        private async void Die()
         {
+            OnDisable();
+            IsLive = false;
+            _enemyAnimator.SetDieAnimation();
+            await Task.Delay(10000);
             gameObject.SetActive(false);
         }
     }
