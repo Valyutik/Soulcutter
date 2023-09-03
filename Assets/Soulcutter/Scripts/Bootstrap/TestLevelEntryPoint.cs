@@ -15,11 +15,11 @@ namespace Soulcutter.Scripts.Bootstrap
         
         private void Awake()
         {
-            woodDetector.Initialize(1f);
+            woodDetector.Initialize(1f, character);
             uiSystem.Initialize(woodDetector);
             character.Initialize(uiSystem.Joystick, uiSystem.ActionButton, uiSystem.DeathScreen, uiSystem.HealthBar, woodDetector, enemyDetector);
-            enemyController.Initialize(character.transform);
-            enemyDetector.Initialize(1f);
+            enemyController.Initialize(character);
+            enemyDetector.Initialize(1f, character);
 
             QualitySettings.vSyncCount = 0;
             Application.targetFrameRate = 60;

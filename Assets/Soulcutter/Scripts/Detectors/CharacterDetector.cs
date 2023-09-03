@@ -10,8 +10,10 @@ namespace Soulcutter.Scripts.Detectors
         private NavMeshAgent _agent;
         public Character.Character Character { get; private set; }
 
-        public override void Initialize(float detectorRange)
+        public override void Initialize(float detectorRange, Character.Character character)
         {
+            Character = character;
+            
             var boxCollider2D = GetComponent<BoxCollider2D>();
             boxCollider2D.isTrigger = true;
             _agent = GetComponentInParent<NavMeshAgent>();
@@ -24,7 +26,10 @@ namespace Soulcutter.Scripts.Detectors
 
         public override void UpdatePass()
         {
-            DetectorRotator.SetDirectionDetector(_agent.velocity.normalized);
+
+            Vector2 direction = Character.transform.position - transform.position; 
+            
+            DetectorRotator.SetDirectionDetector(direction);
         }
 
         protected override void OnTriggerEnter2D(Collider2D other)
@@ -35,12 +40,10 @@ namespace Soulcutter.Scripts.Detectors
         {
             if (!other.TryGetComponent<Character.Character>(out var character)) return;
             OnTriggerWithCharacter?.Invoke();
-            Character = character;
         }
 
         protected override void OnTriggerExit2D(Collider2D other)
         {
-            Character = null;
         }
     }
 }
