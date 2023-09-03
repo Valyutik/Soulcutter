@@ -37,7 +37,7 @@ namespace Soulcutter.Scripts.Combat
         
         private void OnAttack()
         {
-            if (_detector.CurrentEnemy == null) return;
+            if (_detector.CurrentEnemy == null || !_detector.CurrentEnemy.IsLive) return;
             _detector.CurrentEnemy.TakeDamage(_damage);
             _combo.AddComboPoint();
         }

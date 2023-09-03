@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Soulcutter.Scripts.Character.Animators;
 using Soulcutter.Scripts.Character.Movement;
 using Soulcutter.Scripts.Combat;
@@ -55,6 +56,7 @@ namespace Soulcutter.Scripts.Character
         private CharacterMovement _characterMovement;
         private CharacterMovementAnimator _characterMovementAnimator;
         private CharacterActionActivator _characterActionActivator;
+        private CharacterDeathAnimator _characterDeathAnimator;
         private ListenerAttackAndChopAnimationState _listenerAttackAndChopAnimationState;
         public Joystick joystick;
         private ActionButton _actionButton;
@@ -75,6 +77,8 @@ namespace Soulcutter.Scripts.Character
             _healthBar = healthBar;
             
             _healthBar.GetFullHealth(health);
+
+            _characterDeathAnimator = new CharacterDeathAnimator(animator);
             
             _characterMovement = new CharacterMovement(_rigidbody2D, speed);
             this.joystick = joystick;
@@ -124,9 +128,10 @@ namespace Soulcutter.Scripts.Character
             }
         }
         
-        private void Die()
+        private async void Die()
         {
-            gameObject.SetActive(false);
+            _characterDeathAnimator.SetDieAnimation();
+            await Task.Delay(600);
             _deathScreen.ShowScreen();
         }
     }
