@@ -1,11 +1,15 @@
 ﻿using System;
+using Soulcutter.Scripts.Bootstrap;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Zenject;
 
 namespace Soulcutter.Scripts.UI.Joysticks
 {
     public class Joystick : MonoBehaviour, IPointerDownHandler,
-        IPointerUpHandler, IDragHandler, IBeginDragHandler, IEndDragHandler
+        IPointerUpHandler, IDragHandler, IBeginDragHandler, IEndDragHandler,
+        IStartGameListener, IFinishGameListener, IResumeGameListener, IPauseGameListener,
+        IMoveInput
     {
         public event Action<Vector2> OnDragEvent;
         public event Action OnBeginDragEvent, OnEndDragEvent;
@@ -33,12 +37,15 @@ namespace Soulcutter.Scripts.UI.Joysticks
         private Canvas _canvas;
         private Camera _camera;
         private Vector2 _input = Vector2.zero;
+        private bool _isActive;
 
+        [Inject]
         public virtual void Initialize(Camera cam)
         {
             HandleRange = handleRange;
             DeadZone = deadZone;
             _camera = cam;
+            _isActive = true;
             
             _baseRect = GetComponent<RectTransform>();
             _canvas = GetComponentInParent<Canvas>();
@@ -56,9 +63,19 @@ namespace Soulcutter.Scripts.UI.Joysticks
 
         public void FixedUpdatePass()
         {
+            if (!_isActive)
+                return;
             OnDragEvent?.Invoke(Direction);
         }
 
+        public void OnStartGame() => _isActive = true;
+
+        public void OnFinishGame() => _isActive = false;
+
+        public void OnResumeGame() => _isActive = true;
+
+        public void OnPauseGame() => _isActive = false;
+        
         public virtual void OnPointerDown(PointerEventData eventData)
         {
             OnDrag(eventData);
@@ -131,7 +148,8 @@ namespace Soulcutter.Scripts.UI.Joysticks
 
         protected Vector2 ScreenPointToAnchoredPosition(Vector2 screenPosition)
         {
-            if (!RectTransformUtility.ScreenPointToLocalPointInRectangle(_baseRect, screenPosition, _camera,
+            if (!RectTransformUtility.ScreenPointToLocalPointInRectangle(_baseRect,
+                    screenPosition, _camera,
                     out var localPoint)) return Vector2.zero;
             Vector2 sizeDelta;
             var pivotOffset = _baseRect.pivot * (sizeDelta = _baseRect.sizeDelta);
@@ -141,7 +159,7 @@ namespace Soulcutter.Scripts.UI.Joysticks
 
         public void OnBeginDrag(PointerEventData eventData) => OnBeginDragEvent?.Invoke();
         public void OnEndDrag(PointerEventData eventData) => OnEndDragEvent?.Invoke();
-        public void Inable() => gameObject.SetActive(true);
+        public void Enable() => gameObject.SetActive(true);
 
         public void Disable() => gameObject.SetActive(false);
     }

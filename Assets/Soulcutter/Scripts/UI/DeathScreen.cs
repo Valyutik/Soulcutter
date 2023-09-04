@@ -1,4 +1,4 @@
-using Soulcutter.Scripts.UI.ActionButton;
+using Soulcutter.Scripts.UI.Buttons;
 using Soulcutter.Scripts.UI.Joysticks;
 using UnityEngine;
 using UnityEngine.EventSystems;

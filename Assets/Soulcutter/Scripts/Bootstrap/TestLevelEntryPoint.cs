@@ -9,15 +9,15 @@ namespace Soulcutter.Scripts.Bootstrap
     {
         [SerializeField] private WoodDetector woodDetector;
         [SerializeField] private EnemyDetector enemyDetector;
-        [SerializeField] private UISystem uiSystem;
-        [SerializeField] private Character.Character character;
+        //[SerializeField] private UISystem uiSystem;
+        [SerializeField] private Characters.Character character;
         [SerializeField] private EnemyController enemyController;
         
         private void Awake()
         {
             woodDetector.Initialize(1f, character);
-            uiSystem.Initialize(woodDetector);
-            character.Initialize(uiSystem.Joystick, uiSystem.ActionButton, uiSystem.DeathScreen, uiSystem.HealthBar, woodDetector, enemyDetector);
+            //uiSystem.Initialize(woodDetector);
+            //character.Initialize(uiSystem.Joystick, uiSystem.ActionButton, uiSystem.DeathScreen, uiSystem.HealthBar, woodDetector, enemyDetector);
             enemyController.Initialize(character);
             enemyDetector.Initialize(1f, character);
 
@@ -34,7 +34,7 @@ namespace Soulcutter.Scripts.Bootstrap
 
         private void FixedUpdate()
         {
-            uiSystem.FixedUpdatePass();
+            //uiSystem.FixedUpdatePass();
         }
     }
 }

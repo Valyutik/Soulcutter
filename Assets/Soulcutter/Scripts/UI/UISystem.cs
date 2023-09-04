@@ -1,5 +1,5 @@
 using Soulcutter.Scripts.Detectors;
-using Soulcutter.Scripts.UI.ActionButton;
+using Soulcutter.Scripts.UI.Buttons;
 using Soulcutter.Scripts.UI.Joysticks;
 using UnityEngine;
 
@@ -10,13 +10,14 @@ namespace Soulcutter.Scripts.UI
         [SerializeField] private Joystick joystick;
         [SerializeField] private Camera uiCamera;
         [SerializeField] private DeathScreen deathScreen;
-        [SerializeField] private ActionButton.ActionButton actionButton;
+        [SerializeField] private ActionButton actionButton;
         [SerializeField] private HealthBar healthBar;
         private ActionButtonChanger _actionButtonChanger;
         private WoodDetector _detector;
 
         public Joystick Joystick => joystick;
-        public ActionButton.ActionButton ActionButton => actionButton;
+        public Camera UICamera => uiCamera;
+        public Buttons.ActionButton ActionButton => actionButton;
         public DeathScreen DeathScreen => deathScreen;
         public HealthBar HealthBar => healthBar;
         public void Initialize(WoodDetector detector)

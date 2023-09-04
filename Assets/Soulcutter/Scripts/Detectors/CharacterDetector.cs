@@ -8,9 +8,9 @@ namespace Soulcutter.Scripts.Detectors
     {
         public event Action OnTriggerWithCharacter;
         private NavMeshAgent _agent;
-        public Character.Character Character { get; private set; }
+        public Characters.Character Character { get; private set; }
 
-        public override void Initialize(float detectorRange, Character.Character character)
+        public override void Initialize(float detectorRange, Characters.Character character)
         {
             Character = character;
             
@@ -38,7 +38,7 @@ namespace Soulcutter.Scripts.Detectors
 
         protected void OnTriggerStay2D(Collider2D other)
         {
-            if (!other.TryGetComponent<Character.Character>(out var character)) return;
+            if (!other.TryGetComponent<Characters.Character>(out var character)) return;
             OnTriggerWithCharacter?.Invoke();
         }
 

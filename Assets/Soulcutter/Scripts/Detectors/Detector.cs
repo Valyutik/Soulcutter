@@ -7,9 +7,9 @@ namespace Soulcutter.Scripts.Detectors
     {
         protected DetectorRotator DetectorRotator;
         protected DetectorRangeChanger DetectorRangeChanger;
-        private Character.Character _character;
+        private Characters.Character _character;
         
-        public virtual void Initialize(float detectorRange, Character.Character character)
+        public virtual void Initialize(float detectorRange, Characters.Character character)
         {
             _character = character;
             
