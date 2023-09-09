@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using Zenject;
 
 namespace Soulcutter.Scripts.Bootstrap
 {
@@ -7,12 +9,24 @@ namespace Soulcutter.Scripts.Bootstrap
     {
         public GameState GameState => _gameState;
 
-        private readonly List<object> _listeners = new ();
+        private List<IStartGameListener> _listeners;
         private GameState _gameState = GameState.Off;
 
-        private void Awake()
+        [Inject]
+        public void Initialize(IStartGameListener[] startGameListeners)
+        {
+            _listeners = startGameListeners.ToList();
+            Debug.Log(_listeners.Count);
+        }
+
+        private void Start()
         {
             StartGame();
+        }
+
+        private void OnDisable()
+        {
+            FinishGame();
         }
 
         [ContextMenu("Start Game")]
@@ -97,12 +111,12 @@ namespace Soulcutter.Scripts.Bootstrap
 
         public void AddListener(object listener)
         {
-            _listeners.Add(listener);
+            //_listeners.Add(listener);
         }
 
         public void RemoveListener(object listener)
         {
-            _listeners.Remove(listener);
+            //_listeners.Remove(listener);
         }
     }
 }

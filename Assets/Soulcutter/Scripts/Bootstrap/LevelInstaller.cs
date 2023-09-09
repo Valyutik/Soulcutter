@@ -4,6 +4,7 @@ using Soulcutter.Scripts.UI;
 using Soulcutter.Scripts.UI.Buttons;
 using Soulcutter.Scripts.UI.Joysticks;
 using UnityEngine;
+using UnityEngine.Rendering;
 using Zenject;
 
 namespace Soulcutter.Scripts.Bootstrap
@@ -20,6 +21,7 @@ namespace Soulcutter.Scripts.Bootstrap
         {
             BindUI();
             Container.BindInterfacesAndSelfTo<Character>().FromInstance(character).AsSingle();
+            Container.BindInterfacesAndSelfTo<MoveController>().FromNew().AsSingle();
         }
 
         private void BindUI()
@@ -27,8 +29,10 @@ namespace Soulcutter.Scripts.Bootstrap
             Container.Bind<WoodDetector>().FromInstance(woodDetector).AsSingle();
             Container.Bind<UISystem>().FromInstance(uiSystem).AsSingle();
             Container.Bind<Camera>().FromInstance(uiSystem.UICamera).AsSingle();
-            Container.Bind<Joystick>().FromInstance(uiSystem.Joystick).AsSingle();
-            Container.Bind<IMoveInput>().FromInstance(uiSystem.Joystick).AsSingle();
+            //Container.Bind<Joystick>().FromInstance(uiSystem.Joystick).AsSingle();
+            //Container.Bind<IStartGameListener>().To<Joystick>().FromInstance(uiSystem.Joystick).AsSingle();
+            //Container.Bind<IMoveInput>().FromInstance(uiSystem.Joystick).AsSingle();
+            Container.BindInterfacesAndSelfTo<Joystick>().FromInstance(uiSystem.Joystick).AsSingle();
             Container.Bind<ActionButton>().FromInstance(uiSystem.ActionButton).AsSingle();
             Container.Bind<DeathScreen>().FromInstance(uiSystem.DeathScreen).AsSingle();
             Container.Bind<HealthBar>().FromInstance(uiSystem.HealthBar).AsSingle();

@@ -9,20 +9,18 @@ namespace Soulcutter.Scripts.Bootstrap
     {
         [SerializeField] private WoodDetector woodDetector;
         [SerializeField] private EnemyDetector enemyDetector;
-        //[SerializeField] private UISystem uiSystem;
+        [SerializeField] private UISystem uiSystem;
         [SerializeField] private Characters.Character character;
         [SerializeField] private EnemyController enemyController;
         
         private void Awake()
         {
             woodDetector.Initialize(1f, character);
-            //uiSystem.Initialize(woodDetector);
+            uiSystem.Initialize(woodDetector);
             //character.Initialize(uiSystem.Joystick, uiSystem.ActionButton, uiSystem.DeathScreen, uiSystem.HealthBar, woodDetector, enemyDetector);
             enemyController.Initialize(character);
             enemyDetector.Initialize(1f, character);
 
-            QualitySettings.vSyncCount = 0;
-            Application.targetFrameRate = 60;
         }
 
         private void Update()
