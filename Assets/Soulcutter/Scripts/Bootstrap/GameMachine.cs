@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using System.Linq;
+using EditorAttributes;
 using UnityEngine;
 using Zenject;
 
@@ -7,16 +7,33 @@ namespace Soulcutter.Scripts.Bootstrap
 {
     public sealed class GameMachine : MonoBehaviour
     {
-        public GameState GameState => _gameState;
+        public GameState GameState { get; private set; } = GameState.Off;
 
-        private List<IStartGameListener> _listeners;
-        private GameState _gameState = GameState.Off;
+        private readonly List<object> _listeners = new();
 
         [Inject]
-        public void Initialize(IStartGameListener[] startGameListeners)
+        public void Initialize(IStartGameListener[] startGameListeners,
+            IResumeGameListener[] resumeGameListener,
+            IPauseGameListener[] pauseGameListener,
+            IFinishGameListener[] finishGameListener)
         {
-            _listeners = startGameListeners.ToList();
-            Debug.Log(_listeners.Count);
+            
+            foreach (var gameListener in startGameListeners)
+            {
+                _listeners.Add(gameListener);
+            }
+            foreach (var gameListener in resumeGameListener)
+            {
+                _listeners.Add(gameListener);
+            }
+            foreach (var gameListener in pauseGameListener)
+            {
+                _listeners.Add(gameListener);
+            }
+            foreach (var gameListener in finishGameListener)
+            {
+                _listeners.Add(gameListener);
+            }
         }
 
         private void Start()
@@ -28,17 +45,17 @@ namespace Soulcutter.Scripts.Bootstrap
         {
             FinishGame();
         }
-
-        [ContextMenu("Start Game")]
-        private void StartGame()
+        
+        [EditorButton("Start Game")]
+        public void StartGame()
         {
-            if (_gameState != GameState.Off)
+            if (GameState != GameState.Off)
             {
                 Debug.LogWarning($"You can start game only from {GameState.Off} state!");
                 return;
             }
 
-            _gameState = GameState.Play;
+            GameState = GameState.Play;
             
             foreach (var listener in _listeners)
             {
@@ -49,16 +66,16 @@ namespace Soulcutter.Scripts.Bootstrap
             }
         }
         
-        [ContextMenu("Pause Game")]
+        [EditorButton("Pause Game")]
         public void PauseGame()
         {
-            if (_gameState != GameState.Play)
+            if (GameState != GameState.Play)
             {
                 Debug.LogWarning($"You can pause game only from {GameState.Play} state!");
                 return;
             }
 
-            _gameState = GameState.Pause;
+            GameState = GameState.Pause;
             
             foreach (var listener in _listeners)
             {
@@ -69,16 +86,16 @@ namespace Soulcutter.Scripts.Bootstrap
             }
         }
 
-        [ContextMenu("Resume Game")]
+        [EditorButton("Resume Game")]
         public void ResumeGame()
         {
-            if (_gameState != GameState.Pause)
+            if (GameState != GameState.Pause)
             {
                 Debug.LogWarning($"You can resume game only from {GameState.Pause} state!");
                 return;
             }
 
-            _gameState = GameState.Play;
+            GameState = GameState.Play;
             
             foreach (var listener in _listeners)
             {
@@ -89,16 +106,16 @@ namespace Soulcutter.Scripts.Bootstrap
             }
         }
 
-        [ContextMenu("Finish Game")]
+        [EditorButton("Finish Game")]
         public void FinishGame()
         {
-            if (_gameState != GameState.Play)
+            if (GameState != GameState.Play)
             {
                 Debug.LogWarning($"You can finish game only from {GameState.Play} state!");
                 return;
             }
 
-            _gameState = GameState.Finish;
+            GameState = GameState.Finish;
             
             foreach (var listener in _listeners)
             {
@@ -111,12 +128,12 @@ namespace Soulcutter.Scripts.Bootstrap
 
         public void AddListener(object listener)
         {
-            //_listeners.Add(listener);
+            _listeners.Add(listener);
         }
 
         public void RemoveListener(object listener)
         {
-            //_listeners.Remove(listener);
+            _listeners.Remove(listener);
         }
     }
 }

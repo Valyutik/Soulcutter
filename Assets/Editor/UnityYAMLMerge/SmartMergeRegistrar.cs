@@ -3,7 +3,7 @@ using System;
 using UnityEditor;
 using UnityEngine;
 
-namespace UnityYAMLMerge
+namespace Editor.UnityYAMLMerge
 {
     [InitializeOnLoad]
     public class SmartMergeRegistrar

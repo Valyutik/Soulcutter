@@ -4,10 +4,9 @@ using Soulcutter.Scripts.UI;
 using Soulcutter.Scripts.UI.Buttons;
 using Soulcutter.Scripts.UI.Joysticks;
 using UnityEngine;
-using UnityEngine.Rendering;
 using Zenject;
 
-namespace Soulcutter.Scripts.Bootstrap
+namespace Soulcutter.Scripts.Bootstrap.Installers
 {
     public class LevelInstaller : MonoInstaller
     {
