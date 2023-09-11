@@ -9,30 +9,14 @@ namespace Soulcutter.Scripts.Bootstrap
     {
         public GameState GameState { get; private set; } = GameState.Off;
 
-        private readonly List<object> _listeners = new();
+        private readonly List<IGameStateListener> _listeners = new();
 
         [Inject]
-        public void Initialize(IStartGameListener[] startGameListeners,
-            IResumeGameListener[] resumeGameListener,
-            IPauseGameListener[] pauseGameListener,
-            IFinishGameListener[] finishGameListener)
+        public void Initialize(IGameStateListener[] gameStateListeners)
         {
-            
-            foreach (var gameListener in startGameListeners)
+            foreach (var gameStateListener in gameStateListeners)
             {
-                _listeners.Add(gameListener);
-            }
-            foreach (var gameListener in resumeGameListener)
-            {
-                _listeners.Add(gameListener);
-            }
-            foreach (var gameListener in pauseGameListener)
-            {
-                _listeners.Add(gameListener);
-            }
-            foreach (var gameListener in finishGameListener)
-            {
-                _listeners.Add(gameListener);
+                _listeners.Add(gameStateListener);
             }
         }
 
@@ -59,10 +43,7 @@ namespace Soulcutter.Scripts.Bootstrap
             
             foreach (var listener in _listeners)
             {
-                if (listener is IStartGameListener startGameListener)
-                {
-                    startGameListener.OnStartGame();
-                }
+                listener.OnStartGame();
             }
         }
         
@@ -79,10 +60,7 @@ namespace Soulcutter.Scripts.Bootstrap
             
             foreach (var listener in _listeners)
             {
-                if (listener is IPauseGameListener pauseListener)
-                {
-                    pauseListener.OnPauseGame();
-                }
+                listener.OnPauseGame();
             }
         }
 
@@ -99,10 +77,7 @@ namespace Soulcutter.Scripts.Bootstrap
             
             foreach (var listener in _listeners)
             {
-                if (listener is IResumeGameListener resumeListener)
-                {
-                    resumeListener.OnResumeGame();
-                }
+                listener.OnResumeGame();
             }
         }
 
@@ -119,21 +94,18 @@ namespace Soulcutter.Scripts.Bootstrap
             
             foreach (var listener in _listeners)
             {
-                if (listener is IFinishGameListener finishListener)
-                {
-                    finishListener.OnFinishGame();
-                }
+                listener.OnFinishGame();
             }
         }
 
-        public void AddListener(object listener)
+        public void AddListener(IGameStateListener gameStateListener)
         {
-            _listeners.Add(listener);
+            _listeners.Add(gameStateListener);
         }
 
-        public void RemoveListener(object listener)
+        public void RemoveListener(IGameStateListener gameStateListener)
         {
-            _listeners.Remove(listener);
+            _listeners.Remove(gameStateListener);
         }
     }
 }

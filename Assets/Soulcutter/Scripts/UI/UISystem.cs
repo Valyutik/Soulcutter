@@ -2,6 +2,7 @@ using Soulcutter.Scripts.Detectors;
 using Soulcutter.Scripts.UI.Buttons;
 using Soulcutter.Scripts.UI.Joysticks;
 using UnityEngine;
+using Zenject;
 
 namespace Soulcutter.Scripts.UI
 {
@@ -17,12 +18,13 @@ namespace Soulcutter.Scripts.UI
 
         public Joystick Joystick => joystick;
         public Camera UICamera => uiCamera;
-        public Buttons.ActionButton ActionButton => actionButton;
+        public ActionButton ActionButton => actionButton;
         public DeathScreen DeathScreen => deathScreen;
         public HealthBar HealthBar => healthBar;
+        
+        [Inject]
         public void Initialize(WoodDetector detector)
         {
-            joystick.Initialize(uiCamera);
             actionButton.Initialize();
             deathScreen.Initialize(joystick, actionButton);
             healthBar.Initialize();

@@ -1,7 +1,7 @@
 using UnityEngine;
 using Zenject;
 
-namespace Soulcutter.Scripts.Bootstrap
+namespace Soulcutter.Scripts.Bootstrap.Installers
 {
     public class ProjectInstaller : MonoInstaller
     {

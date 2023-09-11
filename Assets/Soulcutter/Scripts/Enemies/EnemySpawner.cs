@@ -1,22 +1,26 @@
-using System;
+using Soulcutter.Scripts.Characters;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
-namespace Soulcutter.Scripts.Combat.Enemies
+namespace Soulcutter.Scripts.Enemies
 {
     public class EnemyController : MonoBehaviour
     {
         [SerializeField] private Enemy enemyPrefab;
         private readonly List<Enemy> _enemies = new();
-        private Transform _characterTransform;
-        private Characters.Character _character;
+        private Character _character;
 
-        public void Initialize(Characters.Character character)
+        [Inject]
+        public void Initialize(Character character)
         {
             _character = character;
-            
-            _enemies.Add(Instantiate(enemyPrefab, new Vector3(-15, 0), Quaternion.identity, transform));
-            _characterTransform = character.transform;
+        }
+
+        private void Start()
+        {
+            _enemies.Add(Instantiate(enemyPrefab,
+                new Vector3(-15, 0), Quaternion.identity, transform));
 
             foreach (var enemy in _enemies)
             {
@@ -29,14 +33,6 @@ namespace Soulcutter.Scripts.Combat.Enemies
             foreach (var enemy in _enemies)
             {
                 enemy.gameObject.SetActive(false);
-            }
-        }
-
-        public void UpdatePass()
-        {
-            foreach (var enemy in _enemies)
-            {
-                enemy.UpdatePass(_characterTransform.position);
             }
         }
     }

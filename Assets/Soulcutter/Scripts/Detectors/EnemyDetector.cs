@@ -1,4 +1,5 @@
 using Soulcutter.Scripts.Combat.Enemies;
+using Soulcutter.Scripts.Enemies;
 using UnityEngine;
 
 namespace Soulcutter.Scripts.Detectors

@@ -13,7 +13,7 @@ using Zenject;
 namespace Soulcutter.Scripts.Characters
 {
     [RequireComponent(typeof(Rigidbody2D), typeof(Animator))]
-    public sealed class Character : MonoBehaviour, IMoveable
+    public sealed class Character : MonoBehaviour, IMovable
     {
         [Header("Movement")]
         [Range(0,100)]
@@ -51,19 +51,20 @@ namespace Soulcutter.Scripts.Characters
         [SerializeField] private float detectorRange;
         
         public bool IsLive { get; private set; }
-        
+        public Vector2 Velocity => _joystick.Direction;
+
+        public Transform Transform => _transform;
+
         private CharacterMovementAnimator _characterMovementAnimator;
         private CharacterActionActivator _characterActionActivator;
         private CharacterDeathAnimator _characterDeathAnimator;
         private ListenerAttackAndChopAnimationState _listenerAttackAndChopAnimationState;
-        public Joystick joystick;
+        private Joystick _joystick;
         private ActionButton _actionButton;
         private WoodChopper _woodChopper;
         private CharacterAttacker _characterAttacker;
         private DeathScreen _deathScreen;
         private HealthBar _healthBar;
-        
-        
         
         public event Action<Vector2> OnCharacterMoveEvent;
         
@@ -72,20 +73,16 @@ namespace Soulcutter.Scripts.Characters
         private readonly float _speed;
         private bool _isMoving;
         
-        
-
         private CharacterActionActivator CharacterActionActivator { get; set; }
 
         [Inject]
         public void Initialize(Joystick joystick, ActionButton actionButton, DeathScreen deathScreen, HealthBar healthBar,
             WoodDetector woodDetector, EnemyDetector enemyDetector)
         {
-            this.joystick = joystick;
+            _joystick = joystick;
             _rigidbody = GetComponent<Rigidbody2D>();
             _transform = transform;
             _isMoving = true;
-            
-            
             
             var animator = GetComponent<Animator>();
 
@@ -100,8 +97,8 @@ namespace Soulcutter.Scripts.Characters
             _characterMovementAnimator = new CharacterMovementAnimator(animator);
 
             OnCharacterMoveEvent += _characterMovementAnimator.SetDirectionAnimation;
-            this.joystick.OnBeginDragEvent += _characterMovementAnimator.SetRunAnimation;
-            this.joystick.OnEndDragEvent += _characterMovementAnimator.SetIdleAnimation;
+            _joystick.OnBeginDragEvent += _characterMovementAnimator.SetRunAnimation;
+            _joystick.OnEndDragEvent += _characterMovementAnimator.SetIdleAnimation;
 
             _listenerAttackAndChopAnimationState = animator.GetBehaviour<ListenerAttackAndChopAnimationState>();
             _listenerAttackAndChopAnimationState.OnStateEnterEvent += DisableMovement;
@@ -117,10 +114,9 @@ namespace Soulcutter.Scripts.Characters
 
         private void OnDisable()
         {
-            
             OnCharacterMoveEvent -= _characterMovementAnimator.SetDirectionAnimation;
-            joystick.OnBeginDragEvent -= _characterMovementAnimator.SetRunAnimation;
-            joystick.OnEndDragEvent -= _characterMovementAnimator.SetIdleAnimation;
+            _joystick.OnBeginDragEvent -= _characterMovementAnimator.SetRunAnimation;
+            _joystick.OnEndDragEvent -= _characterMovementAnimator.SetIdleAnimation;
             
             _listenerAttackAndChopAnimationState.OnStateEnterEvent += DisableMovement;
             _listenerAttackAndChopAnimationState.OnStateExitEvent += EnableMovement;
@@ -143,11 +139,6 @@ namespace Soulcutter.Scripts.Characters
         
         public void DisableMovement() => _isMoving = false;
         public void EnableMovement() => _isMoving = true;
-        
-        
-        
-        
-        
         
         public void TakeDamage(int damageReceived)
         {

@@ -1,4 +1,6 @@
+using Soulcutter.Scripts.Characters;
 using UnityEngine;
+using Zenject;
 
 namespace Soulcutter.Scripts.Detectors
 {
@@ -7,9 +9,10 @@ namespace Soulcutter.Scripts.Detectors
     {
         protected DetectorRotator DetectorRotator;
         protected DetectorRangeChanger DetectorRangeChanger;
-        private Characters.Character _character;
+        private Character _character;
         
-        public virtual void Initialize(float detectorRange, Characters.Character character)
+        [Inject]
+        public virtual void Initialize(Character character)
         {
             _character = character;
             
@@ -19,12 +22,12 @@ namespace Soulcutter.Scripts.Detectors
             DetectorRotator = new DetectorRotator(transform);
             DetectorRangeChanger = new DetectorRangeChanger(boxCollider2D);
             
-            DetectorRangeChanger.SetRangeDetector(detectorRange);
+            DetectorRangeChanger.SetRangeDetector(1f);
         }
 
-        public virtual void UpdatePass()
+        public virtual void Update()
         {
-            DetectorRotator.SetDirectionDetector(_character.joystick.Direction);
+            DetectorRotator.SetDirectionDetector(_character.Velocity);
         }
 
         protected abstract void OnTriggerEnter2D(Collider2D other);

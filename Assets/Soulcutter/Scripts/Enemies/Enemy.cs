@@ -1,9 +1,11 @@
 using System.Threading.Tasks;
 using NavMeshPlus.Extensions;
+using Soulcutter.Scripts.Characters;
+using Soulcutter.Scripts.Combat.Enemies;
 using Soulcutter.Scripts.Detectors;
 using UnityEngine;
 
-namespace Soulcutter.Scripts.Combat.Enemies
+namespace Soulcutter.Scripts.Enemies
 {
     [RequireComponent(typeof(Animator), typeof(AgentOverride2d))]
     public class Enemy : MonoBehaviour
@@ -24,9 +26,9 @@ namespace Soulcutter.Scripts.Combat.Enemies
         private EnemyAnimator _enemyAnimator;
         private EnemyAttacker _enemyAttacker;
         private CharacterDetector _characterDetector;
-        private Characters.Character _character;
+        private Character _character;
 
-        public void Initialize(Characters.Character character)
+        public void Initialize(Character character)
         {
             _character = character;
             IsLive = true;
@@ -34,7 +36,7 @@ namespace Soulcutter.Scripts.Combat.Enemies
             _enemyMovement = new EnemyMovement(GetComponent<AgentOverride2d>());
             _enemyAnimator = new EnemyAnimator(GetComponent<Animator>());
             _characterDetector = GetComponentInChildren<CharacterDetector>();
-            _characterDetector.Initialize(detectorRange, _character);
+            _characterDetector.Initialize(_character);
             _enemyAttacker = new EnemyAttacker(attackTime, attackDelay, damage, _enemyAnimator, _enemyMovement,
                 _characterDetector);
             
@@ -46,10 +48,10 @@ namespace Soulcutter.Scripts.Combat.Enemies
             _characterDetector.OnTriggerWithCharacter -= _enemyAttacker.OnAttack;
         }
 
-        public void UpdatePass(Vector2 point)
+        public void Update()
         {
             if (!isActiveAndEnabled || !IsLive) return;
-            _enemyMovement.SetDirection(point);
+            _enemyMovement.SetDirection(_character.Transform.position);
             
             _enemyAnimator.SetDirectionAnimation(_enemyMovement.Velocity);
             if (_enemyMovement.Velocity == Vector2.zero)
@@ -60,8 +62,6 @@ namespace Soulcutter.Scripts.Combat.Enemies
             {
                 _enemyAnimator.SetRunAnimation();
             }
-            
-            _characterDetector.UpdatePass();
         }
 
         public void TakeDamage(int damageReceived)

@@ -13,7 +13,6 @@ namespace Soulcutter.Scripts.Bootstrap.Installers
         [SerializeField] private UISystem uiSystem;
         [SerializeField] private WoodDetector woodDetector;
         [SerializeField] private EnemyDetector enemyDetector;
-        [Space]
         [SerializeField] private Character character;
         
         public override void InstallBindings()
@@ -28,9 +27,6 @@ namespace Soulcutter.Scripts.Bootstrap.Installers
             Container.Bind<WoodDetector>().FromInstance(woodDetector).AsSingle();
             Container.Bind<UISystem>().FromInstance(uiSystem).AsSingle();
             Container.Bind<Camera>().FromInstance(uiSystem.UICamera).AsSingle();
-            //Container.Bind<Joystick>().FromInstance(uiSystem.Joystick).AsSingle();
-            //Container.Bind<IStartGameListener>().To<Joystick>().FromInstance(uiSystem.Joystick).AsSingle();
-            //Container.Bind<IMoveInput>().FromInstance(uiSystem.Joystick).AsSingle();
             Container.BindInterfacesAndSelfTo<Joystick>().FromInstance(uiSystem.Joystick).AsSingle();
             Container.Bind<ActionButton>().FromInstance(uiSystem.ActionButton).AsSingle();
             Container.Bind<DeathScreen>().FromInstance(uiSystem.DeathScreen).AsSingle();

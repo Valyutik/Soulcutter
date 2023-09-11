@@ -8,8 +8,7 @@ namespace Soulcutter.Scripts.UI.Joysticks
 {
     public class Joystick : MonoBehaviour, IPointerDownHandler,
         IPointerUpHandler, IDragHandler, IBeginDragHandler, IEndDragHandler,
-        IStartGameListener, IFinishGameListener, IResumeGameListener, IPauseGameListener,
-        IMoveInput
+        IGameStateListener, IMoveInput
     {
         public event Action<Vector2> OnDragEvent;
         public event Action OnBeginDragEvent, OnEndDragEvent;

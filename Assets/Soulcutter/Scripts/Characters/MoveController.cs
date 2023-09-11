@@ -3,26 +3,25 @@ using Soulcutter.Scripts.UI.Joysticks;
 
 namespace Soulcutter.Scripts.Characters
 {
-    public class MoveController : IStartGameListener,
-        IFinishGameListener
+    public class MoveController : IGameStateListener
     {
-        private readonly IMoveable _moveable;
+        private readonly IMovable _movable;
         private readonly IMoveInput _moveInput;
 
-        public MoveController(IMoveInput moveInput, IMoveable moveable)
+        public MoveController(IMoveInput moveInput, IMovable movable)
         {
-            _moveable = moveable;
+            _movable = movable;
             _moveInput = moveInput;
         }
         
         public void OnStartGame()
         {
-            _moveInput.OnDragEvent += _moveable.Move;
+            _moveInput.OnDragEvent += _movable.Move;
         }
 
         public void OnFinishGame()
         {
-            _moveInput.OnDragEvent -= _moveable.Move;
+            _moveInput.OnDragEvent -= _movable.Move;
         }
     }
 }
