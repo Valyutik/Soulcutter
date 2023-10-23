@@ -81811,10 +81811,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc3dcd494b641e24d8e90010d173f510, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  character: {fileID: 1640484634}
   uiSystem: {fileID: 202506621}
   woodDetector: {fileID: 1970885980}
   enemyDetector: {fileID: 1888634524}
-  character: {fileID: 1640484634}
 --- !u!114 &1609423361
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -84754,7 +84754,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1911704222}
   m_Layer: 0
-  m_Name: Events
+  m_Name: '[EVENTS]'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -85091,7 +85091,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2082067305}
   m_Layer: 0
-  m_Name: Plugins
+  m_Name: '[PLUGINS]'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

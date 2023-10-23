@@ -41,7 +41,7 @@ namespace Soulcutter.Scripts.UI
             _detector.OnTriggerExitEvent -= _actionButtonChanger.SetAttackButtonType;
         }
 
-        public void FixedUpdatePass()
+        public void FixedUpdate()
         {
             joystick.FixedUpdatePass();
         }

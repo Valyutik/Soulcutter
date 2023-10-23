@@ -37,7 +37,7 @@ namespace Soulcutter.Scripts.Detectors
 
         protected void OnTriggerStay2D(Collider2D other)
         {
-            if (!other.TryGetComponent<Characters.Character>(out var character)) return;
+            if (!other.TryGetComponent<Character>(out _)) return;
             OnTriggerWithCharacter?.Invoke();
         }
 

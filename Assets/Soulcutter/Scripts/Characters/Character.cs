@@ -53,7 +53,7 @@ namespace Soulcutter.Scripts.Characters
         public bool IsLive { get; private set; }
         public Vector2 Velocity => _joystick.Direction;
 
-        public Transform Transform => _transform;
+        public Transform Transform { get; private set; }
 
         private CharacterMovementAnimator _characterMovementAnimator;
         private CharacterActionActivator _characterActionActivator;
@@ -69,7 +69,6 @@ namespace Soulcutter.Scripts.Characters
         public event Action<Vector2> OnCharacterMoveEvent;
         
         private Rigidbody2D _rigidbody;
-        private Transform _transform;
         private readonly float _speed;
         private bool _isMoving;
         
@@ -81,7 +80,7 @@ namespace Soulcutter.Scripts.Characters
         {
             _joystick = joystick;
             _rigidbody = GetComponent<Rigidbody2D>();
-            _transform = transform;
+            Transform = transform;
             _isMoving = true;
             
             var animator = GetComponent<Animator>();
@@ -130,8 +129,8 @@ namespace Soulcutter.Scripts.Characters
         {
             if (_isMoving)
             {
-                _rigidbody.velocity = (_transform.up * direction.y +
-                                       _transform.right * direction.x) * speed;
+                _rigidbody.velocity = (Transform.up * direction.y +
+                                       Transform.right * direction.x) * speed;
             }
             else _rigidbody.velocity = Vector2.zero;
             OnCharacterMoveEvent?.Invoke(_rigidbody.velocity);
