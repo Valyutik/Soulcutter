@@ -8,6 +8,7 @@ namespace Soulcutter.Scripts.Enemies
     public class EnemyController : MonoBehaviour
     {
         [SerializeField] private Enemy enemyPrefab;
+        [SerializeField] private int enemyCount = 5;
         private readonly List<Enemy> _enemies = new();
         private Character _character;
 
@@ -19,8 +20,11 @@ namespace Soulcutter.Scripts.Enemies
 
         private void Start()
         {
-            _enemies.Add(Instantiate(enemyPrefab,
-                new Vector3(-15, 0), Quaternion.identity, transform));
+            for (var i = 0; i < enemyCount; i++)
+            {
+                _enemies.Add(Instantiate(enemyPrefab,
+                    new Vector2(Random.Range(-15,15), Random.Range(-10,10)), Quaternion.identity, transform));
+            }
 
             foreach (var enemy in _enemies)
             {
