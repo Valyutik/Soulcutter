@@ -1,4 +1,4 @@
-using Soulcutter.Scripts.Character;
+using Soulcutter.Scripts.Characters;
 using Soulcutter.Scripts.Detectors;
 
 namespace Soulcutter.Scripts.TreeChopping

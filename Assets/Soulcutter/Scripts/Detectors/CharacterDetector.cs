@@ -1,4 +1,5 @@
 using System;
+using Soulcutter.Scripts.Characters;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -8,9 +9,9 @@ namespace Soulcutter.Scripts.Detectors
     {
         public event Action OnTriggerWithCharacter;
         private NavMeshAgent _agent;
-        public Character.Character Character { get; private set; }
+        public Character Character { get; private set; }
 
-        public override void Initialize(float detectorRange, Character.Character character)
+        public override void Initialize(Character character)
         {
             Character = character;
             
@@ -21,14 +22,12 @@ namespace Soulcutter.Scripts.Detectors
             DetectorRotator = new DetectorRotator(transform);
             DetectorRangeChanger = new DetectorRangeChanger(boxCollider2D);
             
-            DetectorRangeChanger.SetRangeDetector(detectorRange);
+            DetectorRangeChanger.SetRangeDetector(1f);
         }
 
-        public override void UpdatePass()
+        public override void Update()
         {
-
             Vector2 direction = Character.transform.position - transform.position; 
-            
             DetectorRotator.SetDirectionDetector(direction);
         }
 
@@ -38,7 +37,7 @@ namespace Soulcutter.Scripts.Detectors
 
         protected void OnTriggerStay2D(Collider2D other)
         {
-            if (!other.TryGetComponent<Character.Character>(out var character)) return;
+            if (!other.TryGetComponent<Character>(out _)) return;
             OnTriggerWithCharacter?.Invoke();
         }
 
